@@ -436,4 +436,206 @@ Installed rspec:
       create  spec/spec_helper.rb
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ 
 
+Initialize git:
 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ git init
+Initialized empty Git repository in /Users/rpw/self/rails/tutorials/hartl/rails4/sample_app/.git/
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ git add .
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ git commit -m "Initial commit"
+[master (root-commit) 5237831] Initial commit
+ 48 files changed, 1322 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 .rspec
+ create mode 100644 Gemfile
+ create mode 100644 Gemfile.lock
+ create mode 100644 README.rdoc
+ create mode 100644 Rakefile
+ create mode 100644 app/assets/images/.keep
+ create mode 100644 app/assets/javascripts/application.js
+ create mode 100644 app/assets/stylesheets/application.css
+ create mode 100644 app/controllers/application_controller.rb
+ create mode 100644 app/controllers/concerns/.keep
+ create mode 100644 app/helpers/application_helper.rb
+ create mode 100644 app/mailers/.keep
+ create mode 100644 app/models/.keep
+ create mode 100644 app/models/concerns/.keep
+ create mode 100644 app/views/layouts/application.html.erb
+ create mode 100755 bin/bundle
+ create mode 100755 bin/rails
+ create mode 100755 bin/rake
+ create mode 100644 commands
+ create mode 100644 config.ru
+ create mode 100644 config/application.rb
+ create mode 100644 config/boot.rb
+ create mode 100644 config/environment.rb
+ create mode 100644 config/environments/development.rb
+ create mode 100644 config/environments/production.rb
+ create mode 100644 config/environments/test.rb
+ create mode 100644 config/initializers/backtrace_silencers.rb
+ create mode 100644 config/initializers/filter_parameter_logging.rb
+ create mode 100644 config/initializers/inflections.rb
+ create mode 100644 config/initializers/mime_types.rb
+ create mode 100644 config/initializers/secret_token.rb
+ create mode 100644 config/initializers/session_store.rb
+ create mode 100644 config/initializers/wrap_parameters.rb
+ create mode 100644 config/locales/en.yml
+ create mode 100644 config/routes.rb
+ create mode 100644 db/seeds.rb
+ create mode 100644 lib/assets/.keep
+ create mode 100644 lib/tasks/.keep
+ create mode 100644 log/.keep
+ create mode 100644 public/404.html
+ create mode 100644 public/422.html
+ create mode 100644 public/500.html
+ create mode 100644 public/favicon.ico
+ create mode 100644 public/robots.txt
+ create mode 100644 spec/spec_helper.rb
+ create mode 100644 vendor/assets/javascripts/.keep
+ create mode 100644 vendor/assets/stylesheets/.keep
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Changed the README file, renamed it using git to .md, committed.
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ git remote add origin https://github.com/rweisser/sample_app.git
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ git push -u origin master
+Username for 'https://github.com': rweisser
+Password for 'https://rweisser@github.com': 
+Counting objects: 64, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (51/51), done.
+Writing objects: 100% (64/64), 17.97 KiB | 0 bytes/s, done.
+Total 64 (delta 3), reused 0 (delta 0)
+To https://github.com/rweisser/sample_app.git
+ * [new branch]      master -> master
+Branch master set up to track remote branch master from origin.
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Set up heroku:
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ heroku create
+Creating cryptic-basin-4588... done, stack is cedar
+http://cryptic-basin-4588.herokuapp.com/ | git@heroku.com:cryptic-basin-4588.git
+Git remote heroku added
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ git push heroku master
+Initializing repository, done.
+Counting objects: 64, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (51/51), done.
+Writing objects: 100% (64/64), 17.97 KiB | 0 bytes/s, done.
+Total 64 (delta 3), reused 0 (delta 0)
+
+-----> Ruby app detected
+-----> Compiling Ruby/Rails
+-----> Using Ruby version: ruby-2.1.2
+-----> Installing dependencies using 1.5.2
+       Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin -j4 --deployment
+       Fetching gem metadata from https://rubygems.org/..........
+       Fetching additional metadata from https://rubygems.org/..
+       Using minitest (4.7.5)
+       Installing multi_json (1.10.1)
+       Installing i18n (0.6.9)
+       Installing thread_safe (0.3.4)
+       Installing rake (10.3.2)
+       Installing builder (3.1.4)
+       Installing tzinfo (0.3.39)
+       Installing erubis (2.7.0)
+       Installing rack (1.5.2)
+       Installing mime-types (1.25.1)
+       Installing polyglot (0.3.5)
+       Installing activerecord-deprecated_finders (1.0.3)
+       Installing arel (4.0.2)
+       Installing coffee-script-source (1.7.0)
+       Using json (1.8.1)
+       Installing execjs (2.1.0)
+       Using bundler (1.5.2)
+       Installing hike (1.2.3)
+       Installing tilt (1.4.1)
+       Installing thor (0.19.1)
+       Installing rails_serve_static_assets (0.0.2)
+       Installing rails_stdout_logging (0.0.3)
+       Installing activesupport (4.0.5)
+       Installing sass (3.3.8)
+       Installing rack-test (0.6.2)
+       Installing coffee-script (2.2.0)
+       Installing treetop (1.4.15)
+       Installing rdoc (3.12.2)
+       Installing uglifier (2.1.1)
+       Installing sprockets (2.12.1)
+       Installing rails_12factor (0.0.2)
+       Installing activemodel (4.0.5)
+       Installing jbuilder (1.0.2)
+       Installing actionpack (4.0.5)
+       Installing mail (2.5.4)
+       Installing sdoc (0.3.20)
+       Installing activerecord (4.0.5)
+       Installing sprockets-rails (2.0.1)
+       Installing railties (4.0.5)
+       Installing actionmailer (4.0.5)
+       Installing coffee-rails (4.0.1)
+       Installing jquery-rails (3.0.4)
+       Installing sass-rails (4.0.1)
+       Installing pg (0.15.1)
+       Installing turbolinks (1.1.1)
+       Installing rails (4.0.5)
+       Your bundle is complete!
+       Gems in the groups development and test were not installed.
+       It was installed into ./vendor/bundle
+       Post-install message from rdoc:
+       Depending on your version of ruby, you may need to install ruby rdoc/ri data:
+       <= 1.8.6 : unsupported
+       = 1.8.7 : gem install rdoc-data; rdoc-data --install
+       = 1.9.1 : gem install rdoc-data; rdoc-data --install
+       >= 1.9.2 : nothing to do! Yay!
+       Bundle completed (24.07s)
+       Cleaning up the bundler cache.
+-----> Writing config/database.yml to read from DATABASE_URL
+-----> Preparing app for Rails asset pipeline
+       Running: rake assets:precompile
+       I, [2014-06-04T20:15:01.957351 #1000]  INFO -- : Writing /tmp/build_d94f3113-f23b-4e3c-92b0-03ca5d94ec15/public/assets/application-ca8bf38828b1ee4126682823eb3fa49c.js
+       I, [2014-06-04T20:15:01.978610 #1000]  INFO -- : Writing /tmp/build_d94f3113-f23b-4e3c-92b0-03ca5d94ec15/public/assets/application-98f28c7358913ad23ff595d3f8287e32.css
+       Asset precompilation completed (5.75s)
+       Cleaning assets
+       Running: rake assets:clean
+-----> WARNINGS:
+       No Procfile detected, using the default web server (webrick)
+       https://devcenter.heroku.com/articles/ruby-default-web-server
+-----> Discovering process types
+       Procfile declares types -> (none)
+       Default types for Ruby  -> console, rake, web, worker
+
+-----> Compressing... done, 21.6MB
+-----> Launching... done, v6
+       http://cryptic-basin-4588.herokuapp.com/ deployed to Heroku
+
+To git@heroku.com:cryptic-basin-4588.git
+ * [new branch]      master -> master
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ heroku run rake db:migrate
+Running `rake db:migrate` attached to terminal... up, run.9835
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Save heroku info in heroku_address.
+
+Switched to new branch for static pages:
+
+git co -b static-pages
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ git co -b static-pages
+Switched to a new branch 'static-pages'
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ rails generate controller StaticPages home help --no-test-framework
+      create  app/controllers/static_pages_controller.rb
+       route  get "static_pages/help"
+       route  get "static_pages/home"
+      invoke  erb
+      create    app/views/static_pages
+      create    app/views/static_pages/home.html.erb
+      create    app/views/static_pages/help.html.erb
+      invoke  helper
+      create    app/helpers/static_pages_helper.rb
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/static_pages.js.coffee
+      invoke    scss
+      create      app/assets/stylesheets/static_pages.css.scss
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+ 

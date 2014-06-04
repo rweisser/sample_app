@@ -1,0 +1,12 @@
+Heroku address for first_app;
+
+email:  rweisser114@gmail.com
+pw:     the money bed numeric
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ heroku create
+Creating cryptic-basin-4588... done, stack is cedar
+http://cryptic-basin-4588.herokuapp.com/ | git@heroku.com:cryptic-basin-4588.git
+Git remote heroku added
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+http://cryptic-basin-4588.herokuapp.com/ | git@heroku.com:cryptic-basin-4588.git
