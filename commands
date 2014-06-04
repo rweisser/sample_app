@@ -1,0 +1,439 @@
+Commands used in the sample_app project.  Also a log of changes.
+
+[~/self/rails/tutorials/hartl/rails4]$ rails new sample_app --skip-test-unit
+      create  
+      create  README.rdoc
+      create  Rakefile
+      create  config.ru
+      create  .gitignore
+      create  Gemfile
+      create  app
+      create  app/assets/javascripts/application.js
+      create  app/assets/stylesheets/application.css
+      create  app/controllers/application_controller.rb
+      create  app/helpers/application_helper.rb
+      create  app/views/layouts/application.html.erb
+      create  app/assets/images/.keep
+      create  app/mailers/.keep
+      create  app/models/.keep
+      create  app/controllers/concerns/.keep
+      create  app/models/concerns/.keep
+      create  bin
+      create  bin/bundle
+      create  bin/rails
+      create  bin/rake
+      create  config
+      create  config/routes.rb
+      create  config/application.rb
+      create  config/environment.rb
+      create  config/environments
+      create  config/environments/development.rb
+      create  config/environments/production.rb
+      create  config/environments/test.rb
+      create  config/initializers
+      create  config/initializers/backtrace_silencers.rb
+      create  config/initializers/filter_parameter_logging.rb
+      create  config/initializers/inflections.rb
+      create  config/initializers/mime_types.rb
+      create  config/initializers/secret_token.rb
+      create  config/initializers/session_store.rb
+      create  config/initializers/wrap_parameters.rb
+      create  config/locales
+      create  config/locales/en.yml
+      create  config/boot.rb
+      create  config/database.yml
+      create  db
+      create  db/seeds.rb
+      create  lib
+      create  lib/tasks
+      create  lib/tasks/.keep
+      create  lib/assets
+      create  lib/assets/.keep
+      create  log
+      create  log/.keep
+      create  public
+      create  public/404.html
+      create  public/422.html
+      create  public/500.html
+      create  public/favicon.ico
+      create  public/robots.txt
+      create  tmp/cache
+      create  tmp/cache/assets
+      create  vendor/assets/javascripts
+      create  vendor/assets/javascripts/.keep
+      create  vendor/assets/stylesheets
+      create  vendor/assets/stylesheets/.keep
+         run  bundle install
+Fetching gem metadata from https://rubygems.org/..........
+Fetching additional metadata from https://rubygems.org/..
+Resolving dependencies...
+Using rake 10.3.2
+Using i18n 0.6.9
+Using minitest 4.7.5
+Using multi_json 1.10.1
+Using thread_safe 0.3.4
+Using tzinfo 0.3.39
+Using activesupport 4.0.5
+Using builder 3.1.4
+Using erubis 2.7.0
+Using rack 1.5.2
+Using rack-test 0.6.2
+Using actionpack 4.0.5
+Using mime-types 1.25.1
+Using polyglot 0.3.5
+Using treetop 1.4.15
+Using mail 2.5.4
+Using actionmailer 4.0.5
+Using activemodel 4.0.5
+Using activerecord-deprecated_finders 1.0.3
+Using arel 4.0.2
+Using activerecord 4.0.5
+Using bundler 1.6.2
+Using coffee-script-source 1.7.0
+Using execjs 2.1.0
+Using coffee-script 2.2.0
+Using thor 0.19.1
+Using railties 4.0.5
+Using coffee-rails 4.0.1
+Using hike 1.2.3
+Using jbuilder 1.5.3
+Using jquery-rails 3.1.0
+Using json 1.8.1
+Using tilt 1.4.1
+Using sprockets 2.11.0
+Using sprockets-rails 2.0.1
+Using rails 4.0.5
+Using rdoc 4.1.1
+Using sass 3.2.19
+Using sass-rails 4.0.3
+Using sdoc 0.4.0
+Using sqlite3 1.3.9
+Using turbolinks 2.2.2
+Using uglifier 2.5.0
+Your bundle is complete!
+Use `bundle show [gemname]` to see where a bundled gem is installed.
+[~/self/rails/tutorials/hartl/rails4]$ 
+
+Updated the Gemfile.  Listing 3.1.
+Updated .gitignore.  Listing 1.7.
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bundle install --without production
+Fetching gem metadata from https://rubygems.org/.........
+Fetching additional metadata from https://rubygems.org/..
+Resolving dependencies...
+Could not find gem 'cabybara (= 2.1.0) ruby' in the gems available on this machine.
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bundle update
+Fetching gem metadata from https://rubygems.org/.........
+Fetching additional metadata from https://rubygems.org/..
+Resolving dependencies...
+Could not find gem 'cabybara (= 2.1.0) ruby' in the gems available on this machine.
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+So I had to get capybara.
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ gem install capybara
+Fetching: mini_portile-0.6.0.gem (100%)
+Successfully installed mini_portile-0.6.0
+Fetching: nokogiri-1.6.2.1.gem (100%)
+Building native extensions.  This could take a while...
+Building nokogiri using packaged libraries.
+Building libxml2-2.8.0 for nokogiri with the following patches applied:
+    - 0001-Fix-parser-local-buffers-size-problems.patch
+    - 0002-Fix-entities-local-buffers-size-problems.patch
+    - 0003-Fix-an-error-in-previous-commit.patch
+    - 0004-Fix-potential-out-of-bound-access.patch
+    - 0005-Detect-excessive-entities-expansion-upon-replacement.patch
+    - 0006-Do-not-fetch-external-parsed-entities.patch
+    - 0007-Enforce-XML_PARSER_EOF-state-handling-through-the-pa.patch
+    - 0008-Improve-handling-of-xmlStopParser.patch
+    - 0009-Fix-a-couple-of-return-without-value.patch
+    - 0010-Keep-non-significant-blanks-node-in-HTML-parser.patch
+    - 0011-Do-not-fetch-external-parameter-entities.patch
+************************************************************************
+IMPORTANT!  Nokogiri builds and uses a packaged version of libxml2.
+
+If this is a concern for you and you want to use the system library
+instead, abort this installation process and reinstall nokogiri as
+follows:
+
+    gem install nokogiri -- --use-system-libraries
+
+If you are using Bundler, tell it to use the option:
+
+    bundle config build.nokogiri --use-system-libraries
+    bundle install
+
+However, note that nokogiri does not necessarily support all versions
+of libxml2.
+
+For example, libxml2-2.9.0 and higher are currently known to be broken
+and thus unsupported by nokogiri, due to compatibility problems and
+XPath optimization bugs.
+************************************************************************
+Building libxslt-1.1.28 for nokogiri with the following patches applied:
+    - 0001-Adding-doc-update-related-to-1.1.28.patch
+    - 0002-Fix-a-couple-of-places-where-f-printf-parameters-wer.patch
+    - 0003-Initialize-pseudo-random-number-generator-with-curre.patch
+    - 0004-EXSLT-function-str-replace-is-broken-as-is.patch
+    - 0006-Fix-str-padding-to-work-with-UTF-8-strings.patch
+    - 0007-Separate-function-for-predicate-matching-in-patterns.patch
+    - 0008-Fix-direct-pattern-matching.patch
+    - 0009-Fix-certain-patterns-with-predicates.patch
+    - 0010-Fix-handling-of-UTF-8-strings-in-EXSLT-crypto-module.patch
+    - 0013-Memory-leak-in-xsltCompileIdKeyPattern-error-path.patch
+    - 0014-Fix-for-bug-436589.patch
+    - 0015-Fix-mkdir-for-mingw.patch
+************************************************************************
+IMPORTANT!  Nokogiri builds and uses a packaged version of libxslt.
+
+If this is a concern for you and you want to use the system library
+instead, abort this installation process and reinstall nokogiri as
+follows:
+
+    gem install nokogiri -- --use-system-libraries
+
+If you are using Bundler, tell it to use the option:
+
+    bundle config build.nokogiri --use-system-libraries
+    bundle install
+************************************************************************
+Successfully installed nokogiri-1.6.2.1
+Fetching: xpath-2.0.0.gem (100%)
+Successfully installed xpath-2.0.0
+Fetching: capybara-2.3.0.gem (100%)
+Successfully installed capybara-2.3.0
+Parsing documentation for capybara-2.3.0
+Installing ri documentation for capybara-2.3.0
+Parsing documentation for mini_portile-0.6.0
+Installing ri documentation for mini_portile-0.6.0
+Parsing documentation for nokogiri-1.6.2.1
+Installing ri documentation for nokogiri-1.6.2.1
+Parsing documentation for xpath-2.0.0
+Installing ri documentation for xpath-2.0.0
+Done installing documentation for capybara, mini_portile, nokogiri, xpath after 10 seconds
+4 gems installed
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Then I tried bundle install again:
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bundle install --without production
+Fetching gem metadata from https://rubygems.org/.........
+Fetching additional metadata from https://rubygems.org/..
+Resolving dependencies...
+Could not find gem 'cabybara (= 2.1.0) ruby' in the gems available on this machine.
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Still didn't work, even though gem list shows:
+
+  capybara (2.3.0, 2.1.0)
+
+It turned out I had "cababara" in the Gemfile, instead of "capybara."  Sorry, Oh
+Most Magnificent Rodent.
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bundle install --without production
+Fetching gem metadata from https://rubygems.org/.........
+Fetching additional metadata from https://rubygems.org/..
+Resolving dependencies...
+Using rake 10.3.2
+Using i18n 0.6.9
+Using minitest 4.7.5
+Using multi_json 1.10.1
+Using thread_safe 0.3.4
+Using tzinfo 0.3.39
+Using activesupport 4.0.5
+Using builder 3.1.4
+Using erubis 2.7.0
+Using rack 1.5.2
+Using rack-test 0.6.2
+Using actionpack 4.0.5
+Using mime-types 1.25.1
+Using polyglot 0.3.5
+Using treetop 1.4.15
+Using mail 2.5.4
+Using actionmailer 4.0.5
+Using activemodel 4.0.5
+Using activerecord-deprecated_finders 1.0.3
+Using arel 4.0.2
+Using activerecord 4.0.5
+Using bundler 1.6.2
+Using mini_portile 0.6.0
+Using nokogiri 1.6.2.1
+Using xpath 2.0.0
+Using capybara 2.1.0
+Installing ffi 1.9.3
+Installing childprocess 0.5.3
+Using coffee-script-source 1.7.0
+Using execjs 2.1.0
+Using coffee-script 2.2.0
+Using thor 0.19.1
+Using railties 4.0.5
+Using coffee-rails 4.0.1
+Installing diff-lcs 1.2.5
+Using hike 1.2.3
+Using jbuilder 1.0.2 (was 1.5.3)
+Using jquery-rails 3.0.4 (was 3.1.0)
+Using json 1.8.1
+Using tilt 1.4.1
+Using sprockets 2.11.0
+Using sprockets-rails 2.0.1
+Using rails 4.0.5
+Using rdoc 3.12.2 (was 4.1.1)
+Installing rspec-core 2.13.1
+Installing rspec-expectations 2.13.0
+Installing rspec-mocks 2.13.1
+Installing rspec-rails 2.13.1
+Installing rubyzip 0.9.9
+Using sass 3.3.8 (was 3.2.19)
+Using sass-rails 4.0.1 (was 4.0.3)
+Using sdoc 0.3.20 (was 0.4.0)
+Installing websocket 1.0.7
+Installing selenium-webdriver 2.35.1
+Using sqlite3 1.3.8 (was 1.3.9)
+Using turbolinks 1.1.1 (was 2.2.2)
+Using uglifier 2.1.1 (was 2.5.0)
+Your bundle is complete!
+Gems in the group production were not installed.
+Use `bundle show [gemname]` to see where a bundled gem is installed.
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bundle update
+Fetching gem metadata from https://rubygems.org/.........
+Fetching additional metadata from https://rubygems.org/..
+Resolving dependencies...
+Using rake 10.3.2
+Using i18n 0.6.9
+Using minitest 4.7.5
+Using multi_json 1.10.1
+Using thread_safe 0.3.4
+Using tzinfo 0.3.39
+Using activesupport 4.0.5
+Using builder 3.1.4
+Using erubis 2.7.0
+Using rack 1.5.2
+Using rack-test 0.6.2
+Using actionpack 4.0.5
+Using mime-types 1.25.1
+Using polyglot 0.3.5
+Using treetop 1.4.15
+Using mail 2.5.4
+Using actionmailer 4.0.5
+Using activemodel 4.0.5
+Using activerecord-deprecated_finders 1.0.3
+Using arel 4.0.2
+Using activerecord 4.0.5
+Using bundler 1.6.2
+Using mini_portile 0.6.0
+Using nokogiri 1.6.2.1
+Using xpath 2.0.0
+Using capybara 2.1.0
+Using ffi 1.9.3
+Using childprocess 0.5.3
+Using coffee-script-source 1.7.0
+Using execjs 2.1.0
+Using coffee-script 2.2.0
+Using thor 0.19.1
+Using railties 4.0.5
+Using coffee-rails 4.0.1
+Using diff-lcs 1.2.5
+Using hike 1.2.3
+Using jbuilder 1.0.2
+Using jquery-rails 3.0.4
+Using json 1.8.1
+Using tilt 1.4.1
+Using sprockets 2.12.1 (was 2.11.0)
+Using sprockets-rails 2.0.1
+Using rails 4.0.5
+Using rdoc 3.12.2
+Using rspec-core 2.13.1
+Using rspec-expectations 2.13.0
+Using rspec-mocks 2.13.1
+Using rspec-rails 2.13.1
+Using rubyzip 0.9.9
+Using sass 3.3.8
+Using sass-rails 4.0.1
+Using sdoc 0.3.20
+Using websocket 1.0.7
+Using selenium-webdriver 2.35.1
+Using sqlite3 1.3.8
+Using turbolinks 1.1.1
+Using uglifier 2.1.1
+Your bundle is updated!
+Gems in the group production were not installed.
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bundle install
+Using rake 10.3.2
+Using i18n 0.6.9
+Using minitest 4.7.5
+Using multi_json 1.10.1
+Using thread_safe 0.3.4
+Using tzinfo 0.3.39
+Using activesupport 4.0.5
+Using builder 3.1.4
+Using erubis 2.7.0
+Using rack 1.5.2
+Using rack-test 0.6.2
+Using actionpack 4.0.5
+Using mime-types 1.25.1
+Using polyglot 0.3.5
+Using treetop 1.4.15
+Using mail 2.5.4
+Using actionmailer 4.0.5
+Using activemodel 4.0.5
+Using activerecord-deprecated_finders 1.0.3
+Using arel 4.0.2
+Using activerecord 4.0.5
+Using mini_portile 0.6.0
+Using nokogiri 1.6.2.1
+Using xpath 2.0.0
+Using capybara 2.1.0
+Using ffi 1.9.3
+Using childprocess 0.5.3
+Using coffee-script-source 1.7.0
+Using execjs 2.1.0
+Using coffee-script 2.2.0
+Using thor 0.19.1
+Using railties 4.0.5
+Using coffee-rails 4.0.1
+Using diff-lcs 1.2.5
+Using hike 1.2.3
+Using jbuilder 1.0.2
+Using jquery-rails 3.0.4
+Using json 1.8.1
+Using bundler 1.6.2
+Using tilt 1.4.1
+Using sprockets 2.12.1
+Using sprockets-rails 2.0.1
+Using rails 4.0.5
+Using rdoc 3.12.2
+Using rspec-core 2.13.1
+Using rspec-expectations 2.13.0
+Using rspec-mocks 2.13.1
+Using rspec-rails 2.13.1
+Using rubyzip 0.9.9
+Using sass 3.3.8
+Using sass-rails 4.0.1
+Using sdoc 0.3.20
+Using websocket 1.0.7
+Using selenium-webdriver 2.35.1
+Using sqlite3 1.3.8
+Using turbolinks 1.1.1
+Using uglifier 2.1.1
+Your bundle is complete!
+Gems in the group production were not installed.
+Use `bundle show [gemname]` to see where a bundled gem is installed.
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Note that bundle install remembered the --without production option.
+
+Changed config/initializers/secret_token.rb (Listing 3.2).
+
+Installed rspec:
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ rails generate rspec:install
+      create  .rspec
+      create  spec
+      create  spec/spec_helper.rb
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+
