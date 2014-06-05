@@ -638,4 +638,16 @@ Switched to a new branch 'static-pages'
       create      app/assets/stylesheets/static_pages.css.scss
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ 
 
- 
+ [~/self/rails/tutorials/hartl/rails4/sample_app]$ git add . 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ git commit -m "Add a StaticPages controller"
+[static-pages 80eeb82] Add a StaticPages controller
+ 9 files changed, 235 insertions(+)
+ create mode 100644 app/assets/javascripts/static_pages.js.coffee
+ create mode 100644 app/assets/stylesheets/static_pages.css.scss
+ create mode 100644 app/controllers/static_pages_controller.rb
+ create mode 100644 app/helpers/static_pages_helper.rb
+ create mode 100644 app/views/static_pages/help.html.erb
+ create mode 100644 app/views/static_pages/home.html.erb
+ create mode 100644 heroku_address
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
