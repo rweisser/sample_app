@@ -651,3 +651,14 @@ Switched to a new branch 'static-pages'
  create mode 100644 heroku_address
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ 
 
+Created integration tests for StaticPages controller:
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ rails generate integration_test static_pages
+      invoke  rspec
+      create    spec/requests/static_pages_spec.rb
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+NOTE:  rspec calls integration tests "request specs."  They test user interaction
+       through a browser.
+
+
