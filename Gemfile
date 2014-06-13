@@ -6,6 +6,7 @@ gem 'rails', '4.0.5'
 
 group :development, :test do
   gem 'rspec-rails', '2.13.1'
+  gem 'guard-rspec', '2.5.0'
 end
 
 group :test do
