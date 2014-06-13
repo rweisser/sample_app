@@ -661,4 +661,9 @@ Created integration tests for StaticPages controller:
 NOTE:  rspec calls integration tests "request specs."  They test user interaction
        through a browser.
 
+I did the first 2 exercises in Section 3.5.  Then I did number 3, which is to
+instsall postgresql.  That took a bit of research, as well as some trail and error.
+Look in self/postgres/postgres_notes to see how I did it.  There is a symbolic
+link to that file in self/rails.
+
 
