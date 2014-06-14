@@ -5,13 +5,18 @@ ruby '2.1.2'
 gem 'rails', '4.0.5'
 
 group :development, :test do
-  gem 'rspec-rails', '2.13.1'
-  gem 'guard-rspec', '2.5.0'
+  gem 'rspec-rails',  '2.13.1'
+  gem 'guard-rspec',  '2.5.0'  # Watches for file changes, runs tests.
+  gem 'spork-rails',  '4.0.0'  # Spork speeds up tests.
+  gem 'guard-spork',  '1.5.0'  # Makes spork work with guard.
+  gem 'childprocess', '0.3.6'  # Required by spork.
 end
 
 group :test do
   gem 'selenium-webdriver', '2.35.1'
-  gem 'capybara',           '2.1.0'
+  gem 'capybara',           '2.1.0'  # Simulates page requests?
+
+  # gem 'growl', '1.0.3'
 end
 
 gem 'pg',           '0.17.1'
