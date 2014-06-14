@@ -666,4 +666,398 @@ instsall postgresql.  That took a bit of research, as well as some trail and err
 Look in self/postgres/postgres_notes to see how I did it.  There is a symbolic
 link to that file in self/rails.
 
+Starting 3.6, Advanced Setup.
+
+Since I am using rbenv instead of rvm, I couldn't use the rvm method for
+creating binstubs.  Instead, I installed the rubygems-bundler gem,
+as shown in the tutorial.
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ gem install rubygems-bundler
+Fetching: bundler-unload-1.0.2.gem (100%)
+Successfully installed bundler-unload-1.0.2
+Fetching: executable-hooks-1.3.2.gem (100%)
+Building native extensions.  This could take a while...
+# In case of problems run the following command to update binstubs:
+gem regenerate_binstubs
+Successfully installed executable-hooks-1.3.2
+Fetching: rubygems-bundler-1.4.4.gem (100%)
+Successfully installed rubygems-bundler-1.4.4
+Parsing documentation for bundler-unload-1.0.2
+Installing ri documentation for bundler-unload-1.0.2
+Parsing documentation for executable-hooks-1.3.2
+Installing ri documentation for executable-hooks-1.3.2
+Parsing documentation for rubygems-bundler-1.4.4
+Installing ri documentation for rubygems-bundler-1.4.4
+Done installing documentation for bundler-unload, executable-hooks, rubygems-bundler after 0 seconds
+3 gems installed
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ gem regenerate_binstubs
+try also: gem pristine --binstubs
+bundler 1.6.2
+diff-lcs 1.2.5
+erubis 2.7.0
+executable-hooks 1.3.2
+nokogiri 1.6.2.1
+rack 1.5.2
+railties 4.0.5
+rake 10.3.2
+rake 10.1.0
+rdoc 4.1.1
+rdoc 4.1.0
+rdoc 3.12.2
+rspec-core 2.13.1
+rubygems-update 2.1.9
+sass 3.3.8
+sass 3.2.19
+sdoc 0.4.0
+sdoc 0.3.20
+sprockets 2.12.1
+sprockets 2.11.0
+thor 0.19.1
+tilt 1.4.1
+treetop 1.4.15
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Note:  rubygems-bundler left me with only 3 pgms in bin:  bundle, rails,
+and rake.
+
+I am going to run bundle install --binstubs, to see what happens.
+I ran it.  Now everyting is in bin:
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ ls bin
+total 176
+drwxr-xr-x  24 rpw  staff  816 Jun 13 17:34 .
+drwxr-xr-x  26 rpw  staff  884 Jun 13 17:25 ..
+-rwxr-xr-x   1 rpw  staff  378 Jun 13 17:34 autospec
+-rwxr-xr-x   1 rpw  staff  129 Jun  3 17:23 bundle
+-rwxr-xr-x   1 rpw  staff  373 Jun 13 17:34 bundler
+-rwxr-xr-x   1 rpw  staff  370 Jun 13 17:34 erubis
+-rwxr-xr-x   1 rpw  staff  376 Jun 13 17:34 htmldiff
+-rwxr-xr-x   1 rpw  staff  370 Jun 13 17:34 ldiff
+-rwxr-xr-x   1 rpw  staff  376 Jun 13 17:34 nokogiri
+-rwxr-xr-x   1 rpw  staff  368 Jun 13 17:34 rackup
+-rwxr-xr-x   1 rpw  staff  370 Jun 13 17:34 rails
+-rwxr-xr-x   1 rpw  staff  364 Jun 13 17:34 rake
+-rwxr-xr-x   1 rpw  staff  364 Jun 13 17:34 rdoc
+-rwxr-xr-x   1 rpw  staff  360 Jun 13 17:34 ri
+-rwxr-xr-x   1 rpw  staff  372 Jun 13 17:34 rspec
+-rwxr-xr-x   1 rpw  staff  364 Jun 13 17:34 sass
+-rwxr-xr-x   1 rpw  staff  380 Jun 13 17:34 sass-convert
+-rwxr-xr-x   1 rpw  staff  364 Jun 13 17:34 scss
+-rwxr-xr-x   1 rpw  staff  364 Jun 13 17:34 sdoc
+-rwxr-xr-x   1 rpw  staff  376 Jun 13 17:34 sdoc-merge
+-rwxr-xr-x   1 rpw  staff  379 Jun 13 17:34 sprockets
+-rwxr-xr-x   1 rpw  staff  364 Jun 13 17:34 thor
+-rwxr-xr-x   1 rpw  staff  364 Jun 13 17:34 tilt
+-rwxr-xr-x   1 rpw  staff  363 Jun 13 17:34 tt
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Added the guard gem:
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ vi Gemfile
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bundle install
+Fetching gem metadata from https://rubygems.org/.........
+Fetching additional metadata from https://rubygems.org/..
+Resolving dependencies...
+Using rake 10.3.2
+Using i18n 0.6.9
+Using minitest 4.7.5
+Using multi_json 1.10.1
+Using thread_safe 0.3.4
+Using tzinfo 0.3.39
+Using activesupport 4.0.5
+Using builder 3.1.4
+Using erubis 2.7.0
+Using rack 1.5.2
+Using rack-test 0.6.2
+Using actionpack 4.0.5
+Using mime-types 1.25.1
+Using polyglot 0.3.5
+Using treetop 1.4.15
+Using mail 2.5.4
+Using actionmailer 4.0.5
+Using activemodel 4.0.5
+Using activerecord-deprecated_finders 1.0.3
+Using arel 4.0.2
+Using activerecord 4.0.5
+Using bundler 1.6.2
+Using mini_portile 0.6.0
+Using nokogiri 1.6.2.1
+Using xpath 2.0.0
+Using capybara 2.1.0
+Installing timers 1.1.0
+Installing celluloid 0.15.2
+Using ffi 1.9.3
+Using childprocess 0.5.3
+Installing coderay 1.1.0
+Using coffee-script-source 1.7.0
+Using execjs 2.1.0
+Using coffee-script 2.2.0
+Using thor 0.19.1
+Using railties 4.0.5
+Using coffee-rails 4.0.1
+Using diff-lcs 1.2.5
+Installing formatador 0.2.5
+Installing rb-fsevent 0.9.4
+Installing rb-inotify 0.9.5
+Installing listen 2.7.8
+Installing lumberjack 1.0.6
+Installing method_source 0.8.2
+Installing slop 3.5.0
+Installing pry 0.10.0
+Installing guard 2.6.1
+Using rspec-core 2.13.1
+Using rspec-expectations 2.13.0
+Using rspec-mocks 2.13.1
+Installing rspec 2.13.0
+Installing guard-rspec 2.5.0
+Using hike 1.2.3
+Using jbuilder 1.0.2
+Using jquery-rails 3.0.4
+Using json 1.8.1
+Using pg 0.17.1
+Using tilt 1.4.1
+Using sprockets 2.12.1
+Using sprockets-rails 2.0.1
+Using rails 4.0.5
+Using rdoc 3.12.2
+Using rspec-rails 2.13.1
+Using rubyzip 0.9.9
+Using sass 3.3.8
+Using sass-rails 4.0.1
+Using sdoc 0.3.20
+Using websocket 1.0.7
+Using selenium-webdriver 2.35.1
+Using turbolinks 1.1.1
+Using uglifier 2.1.1
+Your bundle is complete!
+Gems in the group production were not installed.
+Use `bundle show [gemname]` to see where a bundled gem is installed.
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ ls bin
+total 208
+drwxr-xr-x  28 rpw  staff  952 Jun 13 17:41 .
+drwxr-xr-x  26 rpw  staff  884 Jun 13 17:41 ..
+-rwxr-xr-x   1 rpw  staff  378 Jun 13 17:41 autospec
+-rwxr-xr-x   1 rpw  staff  129 Jun  3 17:23 bundle
+-rwxr-xr-x   1 rpw  staff  373 Jun 13 17:41 bundler
+-rwxr-xr-x   1 rpw  staff  373 Jun 13 17:41 coderay
+-rwxr-xr-x   1 rpw  staff  370 Jun 13 17:41 erubis
+-rwxr-xr-x   1 rpw  staff  367 Jun 13 17:41 guard
+-rwxr-xr-x   1 rpw  staff  376 Jun 13 17:41 htmldiff
+-rwxr-xr-x   1 rpw  staff  370 Jun 13 17:41 ldiff
+-rwxr-xr-x   1 rpw  staff  370 Jun 13 17:41 listen
+-rwxr-xr-x   1 rpw  staff  376 Jun 13 17:41 nokogiri
+-rwxr-xr-x   1 rpw  staff  361 Jun 13 17:41 pry
+-rwxr-xr-x   1 rpw  staff  368 Jun 13 17:41 rackup
+-rwxr-xr-x   1 rpw  staff  370 Jun 13 17:41 rails
+-rwxr-xr-x   1 rpw  staff  364 Jun 13 17:41 rake
+-rwxr-xr-x   1 rpw  staff  364 Jun 13 17:41 rdoc
+-rwxr-xr-x   1 rpw  staff  360 Jun 13 17:41 ri
+-rwxr-xr-x   1 rpw  staff  372 Jun 13 17:41 rspec
+-rwxr-xr-x   1 rpw  staff  364 Jun 13 17:41 sass
+-rwxr-xr-x   1 rpw  staff  380 Jun 13 17:41 sass-convert
+-rwxr-xr-x   1 rpw  staff  364 Jun 13 17:41 scss
+-rwxr-xr-x   1 rpw  staff  364 Jun 13 17:41 sdoc
+-rwxr-xr-x   1 rpw  staff  376 Jun 13 17:41 sdoc-merge
+-rwxr-xr-x   1 rpw  staff  379 Jun 13 17:41 sprockets
+-rwxr-xr-x   1 rpw  staff  364 Jun 13 17:41 thor
+-rwxr-xr-x   1 rpw  staff  364 Jun 13 17:41 tilt
+-rwxr-xr-x   1 rpw  staff  363 Jun 13 17:41 tt
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Note that now there is a bin/guard pgm.
+
+Initialize it:
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/guard init rspec
+17:44:27 - INFO - Writing new Guardfile to /Users/rpw/self/rails/tutorials/hartl/rails4/sample_app/Guardfile
+17:44:27 - INFO - rspec guard added to Guardfile, feel free to edit it
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Then I edited the guardfile.
+
+Next I installed spork, which speeds up testing.
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ vi Gemfile
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bundle install
+Fetching gem metadata from https://rubygems.org/.........
+Fetching additional metadata from https://rubygems.org/..
+Resolving dependencies...
+You have requested:
+  childprocess = 0.3.6
+
+The bundle currently has childprocess locked at 0.5.3.
+Try running `bundle update childprocess`
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bundle update childprocess
+Fetching gem metadata from https://rubygems.org/.........
+Fetching additional metadata from https://rubygems.org/..
+Resolving dependencies...
+Using rake 10.3.2
+Using i18n 0.6.9
+Using minitest 4.7.5
+Using multi_json 1.10.1
+Using thread_safe 0.3.4
+Using tzinfo 0.3.39
+Using activesupport 4.0.5
+Using builder 3.1.4
+Using erubis 2.7.0
+Using rack 1.5.2
+Using rack-test 0.6.2
+Using actionpack 4.0.5
+Using mime-types 1.25.1
+Using polyglot 0.3.5
+Using treetop 1.4.15
+Using mail 2.5.4
+Using actionmailer 4.0.5
+Using activemodel 4.0.5
+Using activerecord-deprecated_finders 1.0.3
+Using arel 4.0.2
+Using activerecord 4.0.5
+Using bundler 1.6.2
+Using mini_portile 0.6.0
+Using nokogiri 1.6.2.1
+Using xpath 2.0.0
+Using capybara 2.1.0
+Using timers 1.1.0
+Using celluloid 0.15.2
+Using ffi 1.9.3
+Installing childprocess 0.3.6 (was 0.5.3)
+Using coderay 1.1.0
+Using coffee-script-source 1.7.0
+Using execjs 2.1.0
+Using coffee-script 2.2.0
+Using thor 0.19.1
+Using railties 4.0.5
+Using coffee-rails 4.0.1
+Using diff-lcs 1.2.5
+Using formatador 0.2.5
+Using rb-fsevent 0.9.4
+Using rb-inotify 0.9.5
+Using listen 2.7.8
+Using lumberjack 1.0.6
+Using method_source 0.8.2
+Using slop 3.5.0
+Using pry 0.10.0
+Using guard 2.6.1
+Using rspec-core 2.13.1
+Using rspec-expectations 2.13.0
+Using rspec-mocks 2.13.1
+Using rspec 2.13.0
+Using guard-rspec 2.5.0
+Installing spork 1.0.0rc4
+Installing guard-spork 1.5.0
+Using hike 1.2.3
+Using jbuilder 1.0.2
+Using jquery-rails 3.0.4
+Using json 1.8.1
+Using pg 0.17.1
+Using tilt 1.4.1
+Using sprockets 2.12.1
+Using sprockets-rails 2.0.1
+Using rails 4.0.5
+Using rdoc 3.12.2
+Using rspec-rails 2.13.1
+Using rubyzip 0.9.9
+Using sass 3.3.8
+Using sass-rails 4.0.1
+Using sdoc 0.3.20
+Using websocket 1.0.7
+Using selenium-webdriver 2.35.1
+Installing spork-rails 4.0.0
+Using turbolinks 1.1.1
+Using uglifier 2.1.1
+Your bundle is updated!
+Gems in the group production were not installed.
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bundle install
+Using rake 10.3.2
+Using i18n 0.6.9
+Using minitest 4.7.5
+Using multi_json 1.10.1
+Using thread_safe 0.3.4
+Using tzinfo 0.3.39
+Using activesupport 4.0.5
+Using builder 3.1.4
+Using erubis 2.7.0
+Using rack 1.5.2
+Using rack-test 0.6.2
+Using actionpack 4.0.5
+Using mime-types 1.25.1
+Using polyglot 0.3.5
+Using treetop 1.4.15
+Using mail 2.5.4
+Using actionmailer 4.0.5
+Using activemodel 4.0.5
+Using activerecord-deprecated_finders 1.0.3
+Using arel 4.0.2
+Using activerecord 4.0.5
+Using mini_portile 0.6.0
+Using nokogiri 1.6.2.1
+Using xpath 2.0.0
+Using capybara 2.1.0
+Using timers 1.1.0
+Using celluloid 0.15.2
+Using ffi 1.9.3
+Using childprocess 0.3.6
+Using coderay 1.1.0
+Using coffee-script-source 1.7.0
+Using execjs 2.1.0
+Using coffee-script 2.2.0
+Using thor 0.19.1
+Using railties 4.0.5
+Using coffee-rails 4.0.1
+Using diff-lcs 1.2.5
+Using formatador 0.2.5
+Using rb-fsevent 0.9.4
+Using rb-inotify 0.9.5
+Using listen 2.7.8
+Using lumberjack 1.0.6
+Using method_source 0.8.2
+Using slop 3.5.0
+Using pry 0.10.0
+Using guard 2.6.1
+Using rspec-core 2.13.1
+Using rspec-expectations 2.13.0
+Using rspec-mocks 2.13.1
+Using rspec 2.13.0
+Using guard-rspec 2.5.0
+Using spork 1.0.0rc4
+Using guard-spork 1.5.0
+Using hike 1.2.3
+Using jbuilder 1.0.2
+Using jquery-rails 3.0.4
+Using json 1.8.1
+Using pg 0.17.1
+Using bundler 1.6.2
+Using tilt 1.4.1
+Using sprockets 2.12.1
+Using sprockets-rails 2.0.1
+Using rails 4.0.5
+Using rdoc 3.12.2
+Using rspec-rails 2.13.1
+Using rubyzip 0.9.9
+Using sass 3.3.8
+Using sass-rails 4.0.1
+Using sdoc 0.3.20
+Using websocket 1.0.7
+Using selenium-webdriver 2.35.1
+Using spork-rails 4.0.0
+Using turbolinks 1.1.1
+Using uglifier 2.1.1
+Your bundle is complete!
+Gems in the group production were not installed.
+Use `bundle show [gemname]` to see where a bundled gem is installed.
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Note the error message about the childprocess gem version.
+
+Initialized spork with:
+
+  bin/spork --bootstrap
+
+which created (or modified, not sure) the file spec/spec_helper.rb.
+
+Finished installing spork and connecting it to guard.  I amy want
+to add spork to sublime text 2 at some point.  The info is at the
+end of the 3rd chapter of the tutorial.
 
