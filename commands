@@ -1351,3 +1351,35 @@ Then I did it right:
       create      app/assets/stylesheets/users.css.scss
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ 
 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ rails generate integration_test user_pages
+      invoke  rspec
+      create    spec/requests/user_pages_spec.rb
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+At the end of Chapter 5, after committing, merging, and pushing, I started
+getting
+     Failure/Error: before { visit about_path }
+     ActionView::Template::Error:
+       end of file reached
+     # ./app/views/layouts/application.html.erb:5
+
+Research indicates it might be a bug.  I can't find anything wrong with
+the code.
+
+One of the suggestions I found online was to run rake tmp:clear.
+I tried it and wow!  It worked!  Es lebe der Internet!  Long live
+the internet!
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rspec spec
+...........
+
+Finished in 3.14 seconds
+11 examples, 0 failures
+
+Randomized with seed 12354
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Now for the chapter 5 exercises.
+
+Finished chapter 5 exercises, committed, merged, pushed, pushed, heroku.
