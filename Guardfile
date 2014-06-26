@@ -30,7 +30,8 @@ guard 'rspec', all_after_pass: false, cli: '--drb' do
        "spec/acceptance/#{m[1]}_spec.rb"]
   }
   watch(%r{^spec/support/(.+)\.rb$})                  { "spec" }
-  watch('config/routes.rb')                           { "spec/routing" }
+  # watch('config/routes.rb')                           { "spec/routing" }
+  watch('config/routes.rb')                           { "spec" }
 
   # Custom Rails Tutorial specs
   watch(%r{^app/controllers/(.+)_(controller)\.rb$}) do |m|

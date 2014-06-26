@@ -1382,4 +1382,186 @@ Randomized with seed 12354
 
 Now for the chapter 5 exercises.
 
-Finished chapter 5 exercises, committed, merged, pushed, pushed, heroku.
+Finished chapter 5 exercises and committed.
+Will merge, push, and push heroku later, since I am currently at
+Starbucks.
+
+User model:
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ rails g model User name:string email:string
+      invoke  active_record
+      create    db/migrate/20140618203351_create_users.rb
+      create    app/models/user.rb
+      invoke    rspec
+      create      spec/models/user_spec.rb
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Migrated:
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake db:migrate
+== 20140618203351 CreateUsers: migrating ======================================
+-- create_table(:users)
+   -> 0.0686s
+== 20140618203351 CreateUsers: migrated (0.0687s) =============================
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Checked that the users table had been created in database sample_app_dev
+and sample_app (prod).  It is not in sample_app_test, which I guess
+makes sense.  During testing, it will be created each time.
+
+I was a little worried that I would have a problem with my postgres setup,
+since the tutorial is written with sqlite in mind.  I decided to use
+postgres, as suggested in an optional exercise.
+
+Later on:  as part of email uniqueness constraint (see spec/models/user.rb),
+I added an index in postgres:
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ rails g migration add_index_to_users_email
+      invoke  active_record
+      create    db/migrate/20140621172413_add_index_to_users_email.rb
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Next I had to add code to db/migrate/20140621172413_add_index_to_users_email.rb.
+Then bin/rake db:migrate.
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake db:migrate
+== 20140621172413 AddIndexToUsersEmail: migrating =============================
+-- add_index(:users, :email, {:unique=>true})
+   -> 0.0344s
+== 20140621172413 AddIndexToUsersEmail: migrated (0.0346s) ====================
+
+****************
+Secure passwords
+****************
+
+Added bcrypt-ruby to Gemfile.
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bundle install
+Fetching gem metadata from https://rubygems.org/.........
+Fetching additional metadata from https://rubygems.org/..
+Resolving dependencies...
+Using rake 10.3.2
+Using i18n 0.6.9
+Using minitest 4.7.5
+Using multi_json 1.10.1
+Using thread_safe 0.3.4
+Using tzinfo 0.3.39
+Using activesupport 4.0.5
+Using builder 3.1.4
+Using erubis 2.7.0
+Using rack 1.5.2
+Using rack-test 0.6.2
+Using actionpack 4.0.5
+Using mime-types 1.25.1
+Using polyglot 0.3.5
+Using treetop 1.4.15
+Using mail 2.5.4
+Using actionmailer 4.0.5
+Using activemodel 4.0.5
+Using activerecord-deprecated_finders 1.0.3
+Using arel 4.0.2
+Using activerecord 4.0.5
+Installing bcrypt-ruby 3.1.2                   *** Installed ***
+Using sass 3.3.8
+Using bootstrap-sass 2.3.2.0
+Using bundler 1.6.2
+Using mini_portile 0.6.0
+Using nokogiri 1.6.2.1
+Using xpath 2.0.0
+Using capybara 2.1.0
+Using timers 1.1.0
+Using celluloid 0.15.2
+Using ffi 1.9.3
+Using childprocess 0.3.6
+Using coderay 1.1.0
+Using coffee-script-source 1.7.0
+Using execjs 2.1.0
+Using coffee-script 2.2.0
+Using thor 0.19.1
+Using railties 4.0.5
+Using coffee-rails 4.0.1
+Using diff-lcs 1.2.5
+Using formatador 0.2.5
+Using rb-fsevent 0.9.4
+Using rb-inotify 0.9.5
+Using listen 2.7.8
+Using lumberjack 1.0.6
+Using method_source 0.8.2
+Using slop 3.5.0
+Using pry 0.10.0
+Using guard 2.6.1
+Using rspec-core 2.13.1
+Using rspec-expectations 2.13.0
+Using rspec-mocks 2.13.1
+Using rspec 2.13.0
+Using guard-rspec 2.5.0
+Using spork 1.0.0rc4
+Using guard-spork 1.5.0
+Using hike 1.2.3
+Using jbuilder 1.0.2
+Using jquery-rails 3.0.4
+Using json 1.8.1
+Using pg 0.17.1
+Using tilt 1.4.1
+Using sprockets 2.11.0
+Using sprockets-rails 2.0.1
+Using rails 4.0.5
+Using rdoc 3.12.2
+Using rspec-rails 2.13.1
+Using rubyzip 0.9.9
+Using sass-rails 4.0.1
+Using sdoc 0.3.20
+Using websocket 1.0.7
+Using selenium-webdriver 2.35.1
+Using spork-rails 4.0.0
+Using turbolinks 1.1.1
+Using uglifier 2.1.1
+Your bundle is complete!
+Gems in the group production were not installed.
+Use `bundle show [gemname]` to see where a bundled gem is installed.
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+When I ran a test for the as yet non-existent password_digest column, I got
+the message: 
+
+  /Users/rpw/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/activerecord-4.0.5/
+  lib/active_record/migration.rb:383:in `check_pending!': Migrations
+  are pending; run 'bin/rake db:migrate RAILS_ENV=test' to resolve
+  this issue.  (ActiveRecord::PendingMigrationError)
+
+So I ran bin/rake db:migrate RAILS_ENV=test, which did the trick, giving me
+a failing test for "should respond to #password_digest."
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ rails g migration
+   add_password_digest_to_users password_digest:string
+      invoke  active_record
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+This one created the add_column code automatically.
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake db:migrate
+== 20140621175044 AddPasswordDigestToUsers: migrating =========================
+-- add_column(:users, :password_digest, :string)
+   -> 0.1082s
+== 20140621175044 AddPasswordDigestToUsers: migrated (0.1083s) ================
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake test:prepare
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+DON'T FORGET rake test:prepare
+
+Forgetting it probably caused the earlier migration pending issue.
+
+Initial password tests are now passing, but
+
+NOTE:  has_secure_password can prevent some tests from failing.
+       See end of 6.3.2 Password and Confirmation.
+
+Finished chapter 6.
+Finished chapter 6 exercises.
+
+Started chapter 7.
+
+Created branch sign-up
+
