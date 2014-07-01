@@ -1581,7 +1581,7 @@ empty users table.  I added Mr. Hartl back into the table.  He got
 id = 1.  Everything is now okay.
 autoincrement on id. 
 
-Added factory_girl_rails to Gemfile and then:
+CL. Added factory_girl_rails to Gemfile and then:
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ bundle install
 Fetching gem metadata from https://rubygems.org/.........
@@ -1751,3 +1751,286 @@ a dependency of sass-rails (I think).  I add the following to the Gemfile:
 
 Then I did bundle update sass, which gave me sass version 3.2.19.
 
+Next:
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ git push heroku
+Fetching repository, done.
+Everything up-to-date
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Now I'm not sure if the problem is fixed.  Never mind, I forgot to
+commit my Gemfile changes.  So I committed, pushed to git, then
+pushed to heroku.  I didn't get a bunch of warnings this time.
+I did get No Procfile detected, using the default web server (webrick),
+but I have been getting this all along.  I guess the problem is
+fixed.  The sass version on heroku must be older, or there is a
+problem in the newer version, involving caching, as some onlin
+posts indicate.
+
+CL. Migrated on heroku:
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ heroku run rake db:migrate
+Running `rake db:migrate` attached to terminal... up, run.8327
+Migrating to CreateUsers (20140618203351)
+== 20140618203351 CreateUsers: migrating ======================================
+-- create_table(:users)
+   -> 0.0628s
+== 20140618203351 CreateUsers: migrated (0.0631s) =============================
+
+Migrating to AddIndexToUsersEmail (20140621172413)
+== 20140621172413 AddIndexToUsersEmail: migrating =============================
+-- add_index(:users, :email, {:unique=>true})
+   -> 0.0088s
+== 20140621172413 AddIndexToUsersEmail: migrated (0.0089s) ====================
+
+Migrating to AddPasswordDigestToUsers (20140621175044)
+== 20140621175044 AddPasswordDigestToUsers: migrating =========================
+-- add_column(:users, :password_digest, :string)
+   -> 0.0020s
+== 20140621175044 AddPasswordDigestToUsers: migrated (0.0021s) ================
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+CL. Set up ssl on heroku.
+
+I did the following test:
+
+  In config/environments/production.rb, I commented out the line
+  config.force_ssl = true.
+
+  git commit
+
+  git push heroku
+
+  Then I uncommented the same line.
+
+  git commit
+
+  git push heroku
+
+The only warning I got was "No Procfile detected, using the default
+web server (webrick)," which I have been getting all along.  Going to the
+old version of the sass gem (from 3.3.8 to 3.2.19) fixed the problem.
+I wouldn't be surprised if this problem gets fixed by some combination
+of the gem and heroku communities.
+
+Started chapter 8.  Sign in/sign out.
+
+CL. I using rspec, use --no-test-framework.
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ rails generate controller Sessions --no-test-framework
+      create  app/controllers/sessions_controller.rb
+      invoke  erb
+      create    app/views/sessions
+      invoke  helper
+      create    app/helpers/sessions_helper.rb
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/sessions.js.coffee
+      invoke    scss
+      create      app/assets/stylesheets/sessions.css.scss
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+CL.  Don't forget rspec:
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ rails generate integration_test authentication_pages
+      invoke  rspec
+      create    spec/requests/authentication_pages_spec.rb
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Possible problem:  After putting
+
+  resources :session, only: [:new, :create, :destroy]
+  match '/signin',  to: 'sessions#new',         via: 'get'
+  match '/signout', to: 'sessions#destroy',     via: 'delete'
+
+in config/routes.rb, I get the following output from rake routes:
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake routes | grep session
+session_index POST   /session(.:format)        session#create
+  new_session GET    /session/new(.:format)    session#new
+      session DELETE /session/:id(.:format)    session#destroy
+       signin GET    /signin(.:format)         sessions#new
+      signout DELETE /signout(.:format)        sessions#destroy
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ x
+
+*** Problem ***
+
+In the book, it says I should be getting
+
+HTTP
+request  URL        Named route    Action    Purpose
+
+GET      /signin    signin_path    new       page for a new session (signin)
+POST     /sessions  sessions_path  create    create a new session
+DELETE   /signout   signout_path   destroy   delete a session (sign out)
+
+(Table 8.9: RESTful routes provided by the sessions rules in Listing 8.2.)
+
+There is no sessions_path in the rake routes output.  There is no
+session_index_path in table 8.9.  This may or not matter.  It may be a
+version difference.
+
+Solved:  s/session/sessions/ in resoureces :session(s), etc.  Now I am
+getting the correct routes.
+
+*** End of Problem ***
+
+CL. User flash.now instead of flash before a render.  A render does not
+count as a request.  With plain flash, the message will last too long.
+
+CL. IMPORTANT:  helpers are automatically includied in views.  I'm not
+sure if this means that, e. g. the sessions_helper is included in all
+views or only in sessions views.  application_helper is probably in all
+views.  To make a helper available in controllers, include its module
+in application_helper.rb.
+
+CL. Conditional check list.  To use a helper in a controller, include
+its module in application_controller.rb.  Our example is SessionHelper.
+
+CL. How to remember sessions?  Use rails session object or use a
+remember token (cookie).  The remember token makes sessions permanent.
+
+Adding remember token to User:
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ rails g migration add_remember_token_to_users
+      invoke  active_record
+      create    db/migrate/20140629203204_add_remember_token_to_users.rb
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Have to fill in the actual column add and index.
+
+rake db:migrate
+rake test:prepare
+
+*** Problem ***
+
+I can't sign on as the test user example@RailsTutoril.org/foobar.  It is
+not finding him in the db.  Solution:  fix typo.  s/seesion/session/
+in SessionController#create.
+
+*** End of Problem ***
+
+CL.  Add bootstrap to assets/javascripts/application.js
+
+    //= require jquery     
+    //= require jquery_ujs 
+    //= require bootstrap    <--
+    //= require turbolinks 
+    //= require_tree .     
+
+The bootstrap lib is available because of the bootstrap-sass gem.
+
+CL. Add cucumber:
+
+  gem 'cucumber-rails', '1.4.0', :require => false
+  gem 'database_cleaner', github: 'bmabey/database_cleaner'
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bundle install
+Updating git://github.com/bmabey/database_cleaner.git             <<<
+Fetching gem metadata from https://rubygems.org/.........
+Fetching additional metadata from https://rubygems.org/..
+Resolving dependencies...
+Using rake 10.3.2
+Using i18n 0.6.9
+Using minitest 4.7.5
+Using multi_json 1.10.1
+Using thread_safe 0.3.4
+Using tzinfo 0.3.39
+Using activesupport 4.0.5
+Using builder 3.1.4
+Using erubis 2.7.0
+Using rack 1.5.2
+Using rack-test 0.6.2
+Using actionpack 4.0.5
+Using mime-types 1.25.1
+Using polyglot 0.3.5
+Using treetop 1.4.15
+Using mail 2.5.4
+Using actionmailer 4.0.5
+Using activemodel 4.0.5
+Using activerecord-deprecated_finders 1.0.3
+Using arel 4.0.2
+Using activerecord 4.0.5
+Using bcrypt-ruby 3.1.2
+Using sass 3.2.19
+Using bootstrap-sass 2.3.2.0
+Using bundler 1.6.2
+Using mini_portile 0.6.0
+Using nokogiri 1.6.2.1
+Using xpath 2.0.0
+Using capybara 2.1.0
+Using timers 1.1.0
+Using celluloid 0.15.2
+Using ffi 1.9.3
+Using childprocess 0.3.6
+Using coderay 1.1.0
+Using coffee-script-source 1.7.0
+Using execjs 2.2.1
+Using coffee-script 2.2.0
+Using thor 0.19.1
+Using railties 4.0.5
+Using coffee-rails 4.0.1
+Using diff-lcs 1.2.5
+Installing gherkin 2.12.2               <<<
+Installing multi_test 0.1.1             <<<
+Installing cucumber 1.3.15              <<<
+Using hike 1.2.3
+Using tilt 1.4.1
+Using sprockets 2.11.0
+Using sprockets-rails 2.0.1
+Using rails 4.0.5
+Installing cucumber-rails 1.4.0         <<<
+Using database_cleaner 1.3.0 from git://github.com/bmabey/database_cleaner.git (at master)
+Using factory_girl 4.2.0
+Using factory_girl_rails 4.2.0
+Using formatador 0.2.5
+Using rb-fsevent 0.9.4
+Using rb-inotify 0.9.5
+Using listen 2.7.9
+Using lumberjack 1.0.9
+Using method_source 0.8.2
+Using slop 3.5.0
+Using pry 0.10.0
+Using guard 2.6.1
+Using rspec-core 2.13.1
+Using rspec-expectations 2.13.0
+Using rspec-mocks 2.13.1
+Using rspec 2.13.0
+Using guard-rspec 2.5.0
+Using spork 1.0.0rc4
+Using guard-spork 1.5.0
+Using jbuilder 1.0.2
+Using jquery-rails 3.0.4
+Using json 1.8.1
+Using pg 0.17.1
+Using rdoc 3.12.2
+Using rspec-rails 2.13.1
+Using rubyzip 0.9.9
+Using sass-rails 4.0.1
+Using sdoc 0.3.20
+Using websocket 1.0.7
+Using selenium-webdriver 2.35.1
+Using spork-rails 4.0.0
+Using turbolinks 1.1.1
+Using uglifier 2.1.1
+Your bundle is complete!
+Gems in the group production were not installed.
+Use `bundle show [gemname]` to see where a bundled gem is installed.
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ rails g cucumber:install
+      create  config/cucumber.yml
+      create  script/cucumber
+       chmod  script/cucumber
+      create  features/step_definitions
+      create  features/support
+      create  features/support/env.rb
+       exist  lib/tasks
+      create  lib/tasks/cucumber.rake
+        gsub  config/database.yml
+        gsub  config/database.yml
+       force  config/database.yml
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Note features dir.
