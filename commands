@@ -2034,3 +2034,25 @@ Use `bundle show [gemname]` to see where a bundled gem is installed.
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ 
 
 Note features dir.
+
+Finished chapter 8, pushed to origin and heroku, then:
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ heroku run rake db:migrate
+Running `rake db:migrate` attached to terminal... up, run.1897
+Migrating to AddRememberTokenToUsers (20140629203204)
+== 20140629203204 AddRememberTokenToUsers: migrating ==========================
+-- add_column(:users, :remember_token, :string)
+   -> 0.0119s
+-- add_index(:users, :remember_token)
+   -> 0.0260s
+== 20140629203204 AddRememberTokenToUsers: migrated (0.0414s) =================
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+It would be easy to forget heroku run rake db:migrate
+
+CL.  Need a heroku checklist:
+     git push heroku
+     heroku run rake db:migrate
+
+CL.  Use force_ssl?  I saw it in Railcast #270 "Authentication in Rails 3.1."
