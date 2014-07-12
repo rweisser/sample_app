@@ -15,10 +15,6 @@ Spork.prefork do
   # Added:
   require 'factory_girl'
   
-  # Requires supporting ruby files with custom matchers and macros, etc,
-  # in spec/support/ and its subdirectories.
-  Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
-  
   # Checks for pending migrations before tests are run.
   # If you are not using ActiveRecord, you can remove this line.
   ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
@@ -58,6 +54,9 @@ end
 Spork.each_run do
   # This code will be run each time you run your specs.
 
+  # Requires supporting ruby files with custom matchers and macros, etc,
+  # in spec/support/ and its subdirectories.
+  Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 end
 
 # --- Instructions ---
@@ -94,7 +93,10 @@ end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 
-# I copied everything from here down into Spork.prefork do ... end.
+# I copied everything from here down into Spork.prefork do ... end, except
+# for requiring all the stuff in spec/support, which I put in
+# Spork.each_run do ... end.  I was constantly having to restart guard
+# after adding or changing custom matchers and convenience methods.
 
 # ENV["RAILS_ENV"] ||= 'test'
 # require File.expand_path("../../config/environment", __FILE__)

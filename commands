@@ -2056,3 +2056,8 @@ CL.  Need a heroku checklist:
      heroku run rake db:migrate
 
 CL.  Use force_ssl?  I saw it in Railcast #270 "Authentication in Rails 3.1."
+
+Problem:  postgres would not come up after I shut down the mac.  I had to use
+          pg_resetxlog to fix it.  See postgres/postgres_notes.
+
+

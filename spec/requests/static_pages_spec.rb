@@ -2,14 +2,21 @@ require 'spec_helper'
 
 describe "Static pages" do
 
-  # Note:  full_title is defined in spec/support/utilities.rb.
+  # Note:  The tests for full_title are in
+  # spec/helpers/application_helper_spec.rb.
+
+  # spec/support/utilities includes the ApplicationHelper module,
+  # which contains the full_title mehtods.
+
   # Everything in spec/support is available.
+  # I suppose everything in spec/helpers is available, as well.
 
   subject { page }
 
+  # NOTE: Shared Example
   shared_examples_for "all static pages" do
-    it { should have_selector('h1', text: heading) }
-    it { should have_title(full_title(page_title)) }
+    it { should have_heading1(heading) }
+    it { should have_correct_title_for(page_title) }
   end
 
   describe "Home page" do
@@ -48,16 +55,16 @@ describe "Static pages" do
   it "should have the right links on the layout" do
     visit root_path
     click_link "About"
-    expect(page).to have_title(full_title('About Us'))
+    expect(page).to have_correct_title_for('About Us')
     click_link "Help"
-    expect(page).to have_title(full_title('Help'))
+    expect(page).to have_correct_title_for('Help')
     click_link "Contact"
-    expect(page).to have_title(full_title('Contact'))
+    expect(page).to have_correct_title_for('Contact')
     click_link "Home"
-    expect(page).to have_title(full_title(''))
+    expect(page).to have_correct_title_for('')
     click_link "Sign up now!"
-    expect(page).to have_title(full_title('Sign up'))
+    expect(page).to have_correct_title_for('Sign up')
     click_link "sample app"
-    expect(page).to have_title(full_title(''))
+    expect(page).to have_correct_title_for('')
   end
 end
