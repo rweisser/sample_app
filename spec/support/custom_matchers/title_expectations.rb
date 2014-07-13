@@ -1,6 +1,6 @@
 RSpec::Matchers.define :have_correct_title_for do |suffix|
   match do |page|
-    page.should have_title(full_title(suffix))
+    expect(page).to have_title(full_title(suffix))
   end
 
   failure_message_for_should do |page|

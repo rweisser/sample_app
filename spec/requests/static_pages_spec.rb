@@ -9,7 +9,6 @@ describe "Static pages" do
   # which contains the full_title mehtods.
 
   # Everything in spec/support is available.
-  # I suppose everything in spec/helpers is available, as well.
 
   subject { page }
 

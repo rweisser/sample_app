@@ -2060,4 +2060,15 @@ CL.  Use force_ssl?  I saw it in Railcast #270 "Authentication in Rails 3.1."
 Problem:  postgres would not come up after I shut down the mac.  I had to use
           pg_resetxlog to fix it.  See postgres/postgres_notes.
 
+I spent a lot of time on exercise 8.5.2.  I read a lot of rspec documentation
+and learned a lot, especially about custom matchers and a bit about the
+spec_helper.rb file.
+
+CL.  In spec_helper.rb, I moved the load of files in spec/support from
+Spork.prefork to Spork.each_run, removing the necessity of re-starting
+guard each time I changed anything in spec/support.
+
+Still feeling a little confused about the flow of signup, signin, and
+signout, I decided to re-read chapters 7 and 8.
+
 

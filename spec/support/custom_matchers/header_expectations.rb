@@ -1,6 +1,6 @@
 RSpec::Matchers.define :have_heading1 do |heading|
   match do |page|
-    page.should have_selector('h1', text: heading)
+    expect(page).to have_selector('h1', text: heading)
   end
   
   # description did not work.  rspec seems to be generating
