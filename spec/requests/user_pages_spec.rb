@@ -24,9 +24,16 @@ describe "UserPages" do
     let(:submit) { "Create my account" }
 
     describe "with invalid information" do
+      # it "should not create a user" do
+      #   expect { click_button submit }.not_to change(User, :count)
+      # end
+
       it "should not create a user" do
-        expect { click_button submit }.not_to change(User, :count)
+        expect(submit).not_to create(User)
       end
+
+      # NOT USED: See creation_expectations.rb
+      # it { should_not create(User) }
 
       describe "after submission" do
         before { click_button submit }
@@ -42,11 +49,15 @@ describe "UserPages" do
     end
 
     describe "with valid information" do
-      before { valid_signup_entries }
+      before { fill_in_signup_form_correctly }
+
 
       it "should create a user" do
         expect { click_button submit }.to change(User, :count).by(1)
       end
+
+      # NOT USED: See creation_expectations.rb
+      # it { should create(User) }
 
       describe "after saving the user" do
         before { click_button submit }

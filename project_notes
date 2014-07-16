@@ -2071,4 +2071,38 @@ guard each time I changed anything in spec/support.
 Still feeling a little confused about the flow of signup, signin, and
 signout, I decided to re-read chapters 7 and 8.
 
+After doeing some rspec research, I decided to create a
+spec/support/helpers dir and put authentication_helper.rb in it.  My
+spec tree now looks like this:
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ tree spec
+spec
+├── controllers
+├── factories.rb
+├── helpers
+│   └── application_helper_spec.rb
+├── models
+│   └── user_spec.rb
+├── requests
+│   ├── authentication_pages_spec.rb
+│   ├── static_pages_spec.rb
+│   └── user_pages_spec.rb
+├── spec_helper.rb
+├── support
+│   ├── custom_matchers
+│   │   ├── header_expectations.rb
+│   │   ├── message_expectations.rb
+│   │   └── title_expectations.rb
+│   ├── helpers
+│   │   └── authentication_helper.rb
+│   └── utilities.rb
+└── views
+
+8 directories, 12 files
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+CL. I didn't put authentication_helper.rb in spec/helpers, because it
+does not contain any test specs.  It contains helper methods to
+hide the implementation of tests.  It seemed to go better with
+the custom matchers.
 
