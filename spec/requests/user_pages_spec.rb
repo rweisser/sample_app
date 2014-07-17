@@ -24,6 +24,7 @@ describe "UserPages" do
     let(:submit) { "Create my account" }
 
     describe "with invalid information" do
+      # Replaced by custom matcher below.
       # it "should not create a user" do
       #   expect { click_button submit }.not_to change(User, :count)
       # end
@@ -51,9 +52,13 @@ describe "UserPages" do
     describe "with valid information" do
       before { fill_in_signup_form_correctly }
 
+      # Replaced by custom matcher below.
+      # it "should create a user" do
+      #   expect { click_button submit }.to change(User, :count).by(1)
+      # end
 
       it "should create a user" do
-        expect { click_button submit }.to change(User, :count).by(1)
+        expect(submit).to create(User)
       end
 
       # NOT USED: See creation_expectations.rb

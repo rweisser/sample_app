@@ -12,6 +12,10 @@
 #
 # expect(button_text).to     destroy(model)
 # expect(button_text).not_to destroy(model)
+#
+# Example:
+#
+# expect(submit).to create(User)
 
 RSpec::Matchers.define :create do | model |
   match do | button |

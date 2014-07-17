@@ -2101,8 +2101,21 @@ spec
 8 directories, 12 files
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ 
 
+I had a lot of problems with custom matchers.  I got them to work,
+but I couldn't get the description or the failure messages to work,
+resulting in crappy output from bin/rspec -fd.
+
 CL. I didn't put authentication_helper.rb in spec/helpers, because it
 does not contain any test specs.  It contains helper methods to
 hide the implementation of tests.  It seemed to go better with
 the custom matchers.
+
+I finally got the custom matchers to work perfectly.  Unlike the examples
+in the book, they don't use expect.  They return boolean values.  I am
+especially proud  of the one which replaces
+
+  expect {submit signup }.to change(User, :change) 
+
+After some research in the rspec source code, I now understand how #expect
+and #change work.  Pretty wild.
 
