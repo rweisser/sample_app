@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  default_scope { order :id }
+
   before_save   { email.downcase! }
   before_create :create_remember_token
 
@@ -22,6 +24,20 @@ class User < ActiveRecord::Base
 
   def User.digest(token)
     Digest::SHA1.hexdigest(token.to_s)
+  end
+
+  def to_s
+    <<EOS
+User
+  id: #{id}
+  name: #{name}
+  email: #{email}
+  created_at: #{created_at}
+  updated_at: #{updated_at}
+  password_digest: #{password_digest}
+  remember_token: #{remember_token}
+  admin: #{admin}
+EOS
   end
 
   private

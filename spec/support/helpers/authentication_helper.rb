@@ -1,10 +1,13 @@
-require 'spec_helper'
-
-def fill_in_signup_form_correctly
-  fill_in "Name",         with: "Example User"
-  fill_in "Email",        with: "user@example.com"
-  fill_in "Password",     with: "foobar"
-  fill_in "Confirmation", with: "foobar"
+def sign_in(user, options={})
+  if options[:no_capybara]
+    # Sign in when not using Capybara.
+    remember_token = User.new_remember_token
+    cookies[:remember_token] = remember_token
+    user.update_attribute(:remember_token, User.digest(remember_token))
+  else
+    visit signin_path
+    valid_signin(user)
+  end
 end
 
 def valid_signin(user)
@@ -13,6 +16,22 @@ def valid_signin(user)
   click_button "Sign in"
 end
 
-def create_new_user
-  FactoryGirl.create(:user)
+def fill_in_signup_form_correctly
+  fill_in "Name",         with: "Example User"
+  fill_in "Email",        with: "user@example.com"
+  fill_in "Password",     with: "foobar"
+  fill_in "Confirmation", with: "foobar"
 end
+
+def create_new_user(options = {})
+  FactoryGirl.create(:user, options)
+end
+
+def create_new_users(n)
+  n.times { create_new_user }
+end
+
+def create_new_admin(options = {})
+  FactoryGirl.create(:admin, options)
+end
+

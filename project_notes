@@ -1,5 +1,12 @@
 Commands used in the sample_app project.  Also a log of changes.
 
+Issues
+
+Notes
+
+  Helper modules are automatically included in views, but not in controllers.
+  flash has 3 keys: :success, :error, and :notice
+
 CL = Checklist
 
 [~/self/rails/tutorials/hartl/rails4]$ rails new sample_app --skip-test-unit
@@ -1876,7 +1883,7 @@ getting the correct routes.
 
 *** End of Problem ***
 
-CL. User flash.now instead of flash before a render.  A render does not
+CL. Use flash.now instead of flash before a re-render.  A render does not
 count as a request.  With plain flash, the message will last too long.
 
 CL. IMPORTANT:  helpers are automatically includied in views.  I'm not
@@ -2105,17 +2112,94 @@ I had a lot of problems with custom matchers.  I got them to work,
 but I couldn't get the description or the failure messages to work,
 resulting in crappy output from bin/rspec -fd.
 
-CL. I didn't put authentication_helper.rb in spec/helpers, because it
-does not contain any test specs.  It contains helper methods to
-hide the implementation of tests.  It seemed to go better with
-the custom matchers.
+CL. I didn't put authentication_helper.rb in spec/helpers, because
+it does not contain any test specs.  It contains helper methods to
+hide the implementation of tests.  It seemed to go better with the
+custom matchers.
 
-I finally got the custom matchers to work perfectly.  Unlike the examples
-in the book, they don't use expect.  They return boolean values.  I am
-especially proud  of the one which replaces
+I finally got the custom matchers to work perfectly.  Unlike the
+examples in the book, they don't use expect.  They return boolean
+values.  I am especially proud  of the one which replaces
 
-  expect {submit signup }.to change(User, :change) 
+  expect {submit signup }.to change(User, :change)
 
-After some research in the rspec source code, I now understand how #expect
-and #change work.  Pretty wild.
+After some research in the rspec source code, I now understand how
+#expect and #change work.  Pretty wild.
+
+I reviewed chapters 6, 7, and 8, which gave me a much better
+understanding of what's going on.  I am still a bit having on some
+of the details of sessions, but my comfort level with the RESTful
+stuff is much higher.
+
+Started chapter 9, Updating, Showing, and Deleting Users.  I am
+using my rspec custom matchers from chapter 8 when possible.
+
+Note:  Although the tutorial puts the sign_in spec helper method
+in spec/utilities.rb, I put it in
+spec/support/helpers/authentications_helpers.rb.
+
+I couldn't get the tests for the User#index action/view to work.
+It looked as though the first user, of 3, in the test, Michael
+Hartl, was not showing up on the screen.  Later I found out that,
+actually,  none of them were visible.  I wrote a nice User#show
+method, which displayed nicely all the users in @Users, which was
+referenced in users/index.html.erb.  The users were there, but were
+not being displayed.  Eventually, it became clear that there was a
+problem in the view code.  I had <% instead of <%=, so the results
+of gravatar_for and link_to were not displayed.  I also had some
+error in my css code.  I hadn't copied the code in the tutorial
+correctly.  I wish I could see why the correct code does what it
+does, but unfortunately, I can't.
+
+CL.  Added faker to Gemfile and did bundle install.
+
+~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake db:reset
+-- enable_extension("plpgsql")
+   -> 0.0171s
+-- create_table("users", {:force=>true})
+   -> 0.1781s
+-- add_index("users", ["email"], {:name=>"index_users_on_email", :unique=>true, :using=>:btree})
+   -> 0.0056s
+-- add_index("users", ["remember_token"], {:name=>"index_users_on_remember_token", :using=>:btree})
+   -> 0.0029s
+-- initialize_schema_migrations_table()
+   -> 0.0073s
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake db:populate
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake test:prepare
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Note:  In the book, the first user on the All users page is Example User
+(id 1) followed by the 99 users with random names.  In my app, Example
+User comes last, even though he has id = 1.  I confirmed that this was
+also the case when, in psql, I executed select * from users.  To get
+them in order by id, I could do @users = User.all.sort or
+User.all.sort_by(:id).  I could also do the sorting in the view.  For
+now, I am leaving it as is.
+
+CHANGED MY MIND.  To retrieve the users in id order, I would have to
+sort the result.  I was worried that this would be ineffiecient.  Then
+I realized that an index on id would eliminate the need for an actual
+sort.  After confirming through psql that an index exists, I decided
+to use a sort.  Of course, then I started to have doubts.  Does
+ActiveRecord ask psql to do the sort, or does it do the sort itself.
+If ActiveRecord does it, it would be very inefficient with large
+numbers of users.  Since I have only 100 users, I decided to go for
+it.  In UsersController, I now have @users = User.all.sort.  I'll
+check in irb to see the generated sql statement.
+
+RESULT:  ActiveRecord does not use the database to sort the result.
+User.all.sort generated "select * from users".  This is a
+disappointment.
+
+FIXED:  After consulting the magic internet, I added
+
+  default_scope { order :id }
+
+to the User class.  Now the sql is:
+
+  select * from users order by id
+
+Continuing:  Added will_paginate and bootstrap-will_paginate (note
+dash and underscores) to the Gemfile and ran bundle install.
+
 

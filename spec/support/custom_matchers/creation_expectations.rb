@@ -16,19 +16,29 @@
 # Example:
 #
 # expect(submit).to create(User)
+#
+# TODO: Alow the caller to pass text for a button or a link.
 
-RSpec::Matchers.define :create do | model |
+RSpec::Matchers.define :create do | model, options |
   match do | button |
     count = model.count
-    click_button button
+    click_button button, options
     model.count == count + 1
   end
 end
 
-RSpec::Matchers.define :destroy do | model |
+RSpec::Matchers.define :destroy do | model, options |
   match do | button |
     count = model.count
-    click_button button
+    click_button button, options
+    model.count == count - 1
+  end
+end
+
+RSpec::Matchers.define :destroy_first do | model |
+  match do | link |
+    count = model.count
+    click_link link, match: :first
     model.count == count - 1
   end
 end
@@ -37,7 +47,7 @@ end
 # Old stuff (didn't work)
 ########################################
 
-# NOTE:  This file is NOT BEING USED.  I couldn't figure
+# NOTE:  This stuff is NOT BEING USED.  I couldn't figure
 # out how to change the matcher to a predicate, so I don't
 # think it is correct to use it as a matcher.  All
 # the messages (desciption and failure) are ignored,

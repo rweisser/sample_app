@@ -1,7 +1,17 @@
 Users in sample_app_dev
 
-Name               Email                         Password
+Name               Email                         Password  Status
 
-Rails Tutorial     example@RailsTutorial.org     foobar
-Robert Weiswser    rweisser114@gmail.com         foobar
+Rails Tutorial     example@RailsTutorial.org     foobar    deleted
+Robert Weiswser    rweisser114@gmail.com         foobar    deleted
+
+NOTE: The users above get blown away in Section 9.3.2.
+
+Using faker, we now have 100 users:
+
+id 1 is Example User/example@railstutorial.com/foobar/foobar
+
+and then 99 users with random names, email: example-n@railstutorial.com, and
+password: "password", where 1 <= n <= 100.
+
 
