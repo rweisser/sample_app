@@ -7,8 +7,13 @@ describe "Authentication" do
   describe "signin page" do
     before { visit signin_path }
 
-    it { should have_content('Sign in') }
-    it { should have_correct_title_for('Sign in') }
+    it { should     have_content('Sign in') }
+    it { should     have_correct_title_for('Sign in') }
+    it { should     have_link('Sign in',   href: signin_path) }
+    it { should_not have_link('Users',     href: users_path) }
+    it { should_not have_link('Profile') }
+    it { should_not have_link('Settings') }
+    it { should_not have_link('Sign out',  href: signout_path) }
   end
 
   describe "signin" do
