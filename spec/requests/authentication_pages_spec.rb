@@ -4,16 +4,20 @@ describe "Authentication" do
 
   subject { page }
 
-  describe "signin page" do
-    before { visit signin_path }
-
-    it { should     have_content('Sign in') }
-    it { should     have_correct_title_for('Sign in') }
+  shared_examples_for "the signin page" do
     it { should     have_link('Sign in',   href: signin_path) }
     it { should_not have_link('Users',     href: users_path) }
     it { should_not have_link('Profile') }
     it { should_not have_link('Settings') }
     it { should_not have_link('Sign out',  href: signout_path) }
+  end
+
+  describe "signin page" do
+    before { visit signin_path }
+
+    it { should     have_content('Sign in') }
+    it { should     have_correct_title_for('Sign in') }
+    it_should_behave_like "the signin page"
   end
 
   describe "signin" do
@@ -24,6 +28,7 @@ describe "Authentication" do
 
       it { should have_correct_title_for('Sign in') }
       it { should have_error_message('Invalid') }
+      it_should_behave_like "the signin page"
 
       describe "after visiting another page" do
         before { click_link "Home" }
