@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :signed_in_user, only: [:index, :edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
+  before_action :not_signed_in,  only: [:new, :create]
 
   def index
     @users = User.paginate(page: params[:page])
@@ -56,6 +57,9 @@ class UsersController < ApplicationController
     # Before filters
 
     def signed_in_user
+      # puts "in signed_in_user"
+      # puts "current user = #{current_user}"
+      # puts "current user signed in? = #{signed_in?}"
       redirect_to signin_url, notice: "Please sign in." unless signed_in?
     end
 
@@ -66,5 +70,12 @@ class UsersController < ApplicationController
 
     def admin_user
       redirect_to(root_url) unless current_user.admin?
+    end
+
+    def not_signed_in
+      # puts "in NOT_signed_in"
+      # puts "current user = #{current_user}"
+      # puts "current user signed in? = #{signed_in?}"
+      redirect_to root_url if signed_in?
     end
 end

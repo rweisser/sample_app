@@ -4,6 +4,12 @@ def sign_in(user, options={})
     remember_token = User.new_remember_token
     cookies[:remember_token] = remember_token
     user.update_attribute(:remember_token, User.digest(remember_token))
+    # I had to add the next line to try to make the tests for Ex. 9.6.6 work.
+    # Otherwise, signed_in? returns false.
+    # The line exists in # app/helpers/sessions_helper.rb,
+    # although it was qualified by "self.".
+    # Unfortunately, it didn't work.  I'm not sure what self is here.
+    # self.current_user = user
   else
     visit signin_path
     valid_signin(user)

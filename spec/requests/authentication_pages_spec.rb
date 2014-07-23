@@ -79,6 +79,43 @@ describe "Authentication" do
       end
     end
 
+    # The following didn't work.  I couldn't find a way for the sign_in
+    # method in spec/support/helpers/sessions_helper.rb to set things
+    # up so that signed_in? would return true during testing.  Therefore,
+    # when my before_action not_signed_in calls signed_in?, it always
+    # returns false, but only in testing.  I put in some puts statements
+    # to show that it was working correctly in the real app when I
+    # directed the browser to localhost:3000/users/new.  The puts
+    # output shows up in the log.  The signed_in?  method correctly
+    # returns true in the log and the redirection works as will.
+
+    # Unfortunately, there does not seem to be a way to direct the
+    # browser to the create action, so I can't test what happens when
+    # a signed_in user tries to access the create page in the real
+    # app..
+
+    # As far as I could tell, Hartl does not provide a way to test
+    # these things using rspec, apparently for good reason.
+
+    # describe "for signed-in users" do
+    #   let(:user) { create_new_user }
+    #   let(:new_user) { FactoryGirl.attributes_for :user }
+    #   before { sign_in user, no_copybara: true }
+    #  
+    #   describe "in the Users controller" do
+    #     
+    #     describe "trying to access the new user page" do
+    #       before { puts user; get new_user_path }
+    #       specify { expect(response).to redirect_to(root_path) }
+    #     end
+    #     
+    #     describe "trying to access the create user page" do
+    #       before { post :create, new_user }
+    #       specify { expect(response).to redirect_to(root_path) }
+    #     end
+    #   end
+    # end
+
     describe "as wrong user" do
       let(:user)       { create_new_user }
       let(:wrong_user) { create_new_user email: "wrong@example.com" }

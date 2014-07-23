@@ -5,6 +5,7 @@ module SessionsHelper
     cookies.permanent[:remember_token] = remember_token
     # update_attributes avoids validations.
     user.update_attribute(:remember_token, User.digest(remember_token))
+    puts "in sign_in, self = #{self}"
     self.current_user = user
   end
 
