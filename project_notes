@@ -2,10 +2,31 @@ Commands used in the sample_app project.  Also a log of changes.
 
 Issues
 
+  Problem 9.6.6.  Got redirect new to root path to work in app.  Have to assume
+  it works for create also, but could not test.  In rspec, could not get either
+  one to work, because signed_in? always returns false.  Not sure if it is
+  possible.  One thing to try:  include SessionsHelper in support/utilities.rb.
+  Would then hae to override the app version of sign_in with the test version.
+  The sample app code on github (see Notes below) does not have the solution.
+
 Notes
 
   Helper modules are automatically included in views, but not in controllers.
   flash has 3 keys: :success, :error, and :notice
+
+  My rspec custom matchers and helpers can be seen altogether using the
+  following command (in .../sample_app):
+
+    fcat .rb spec/support
+
+  Sample app code is at https://github.com/railstutorial/sample_app_rails_4.
+
+Users
+
+  Example User/example@railstutorial.com/foobar
+
+  Random Name/example-n@railstutorial.com/password   (literally "password")
+    where 1 <= n <= 99.
 
 CL = Checklist
 
@@ -2202,4 +2223,97 @@ to the User class.  Now the sql is:
 Continuing:  Added will_paginate and bootstrap-will_paginate (note
 dash and underscores) to the Gemfile and ran bundle install.
 
+CL. For pagination, put will_paginate in the view above and below the list
+of paginated items.
+
+Adding admin attribute to users.  Note that I used vi to add a default value.
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ rails generate migration add_admin_to_users admin:boolean
+      invoke  active_record
+      create    db/migrate/20140721200550_add_admin_to_users.rb
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ cat db/migrate/20140721200550_add_admin_to_users.rb
+class AddAdminToUsers < ActiveRecord::Migration
+  def change
+    add_column :users, :admin, :boolean
+  end
+end
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ vi db/migrate/20140721200550_add_admin_to_users.rb[~/self/rails/tutorials/hartl/rails4/sample_app]$ cat db/migrate/20140721200550_add_admin_to_users.rb
+class AddAdminToUsers < ActiveRecord::Migration
+  def change
+    add_column :users, :admin, :boolean, default: false
+  end
+end
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake db:migrate
+== 20140721200550 AddAdminToUsers: migrating ==================================
+-- add_column(:users, :admin, :boolean, {:default=>false})
+   -> 0.0312s
+== 20140721200550 AddAdminToUsers: migrated (0.0313s) =========================
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake test:prepare
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+Finished chapter 9.  Had some adventures with the tests in section 9.5.  Leaving
+out the second '_' in create_new_user caused rspec to bail out of the tests without
+and final messages.  It took some time and debugging to figure that out.
+
+At the end of chapter 9, Hartl shows the final Gemfile for the project.  Mine is
+a bit different, because I am using postgres in all there environments.
+
+To finishe the chapter, I did
+
+$ git add .
+$ git commit -m "Finish user edit, update, index, and destroy actions"
+$ git checkout master
+$ git merge updating-users
+
+You can also deploy the application and even populate the production database with sample users (using the pg:reset task to reset the production database):
+
+$ git push heroku
+$ heroku pg:reset DATABASE
+$ heroku run rake db:migrate
+$ heroku run rake db:populate
+To get the changes to show up, you may have to force an app restart at Heroku:
+
+$ heroku restart
+
+I also did
+  git branch -d updating-users
+  git push
+after the git merge, to keep origin (github) up to date.
+
+I had a problem with exercise 9.6.6:  If a user is signed in, redirect to access
+to User#new and User#create to the root_path.  I got it to work in the app
+by adding a before_action called not_signed_in.  It worked fine.  It calls
+signed_in? to determine if a user is signed in.  When I wrote the tests, I had
+2 problems:
+  
+  The test for new was failing because the redirect was not happening.  Using puts
+  in not_signed_in, I found that signed_in? was always returning false, even
+  though I use "before { sign_in user }.  The test version of sign_in does not
+  set the current_user, which is required by signed_in?.  I tried all sorts of
+  things, including research, but I could not get current_user or signed_in? to
+  work in test.
+
+  For create, I couldn't even get my test to try to access the User#create action.
+
+I put some comments in spec/requests/authentification_pages_spec.rb and
+spec/support/helpers/authentication_helper.rb.
+
+For exercise 9.6.7, I added the following to the layout:
+
+      <pre class="debug_dump">
+        <% if Rails.env.development? %>
+            <%= request.public_methods.sort %><hr>
+              request.env:
+            <%  request.env.each do | k, v | %>
+                <%= "#{k} => #{v}" %><br>
+            <% end %>
+        <% end %>
+      </pre>
+
+After I was finished experimenting, I took the code out, so for ex. 9.6.7, there
+was nothing to commit.
+
+*** Discovered that I had skipped the Friendly Forwarding section (9.2.3).
+Revisited it.
 

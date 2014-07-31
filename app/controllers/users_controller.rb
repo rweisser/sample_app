@@ -60,6 +60,7 @@ class UsersController < ApplicationController
       # puts "in signed_in_user"
       # puts "current user = #{current_user}"
       # puts "current user signed in? = #{signed_in?}"
+      store_location
       redirect_to signin_url, notice: "Please sign in." unless signed_in?
     end
 
