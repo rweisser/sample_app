@@ -34,8 +34,10 @@ module SessionsHelper
   end
 
   def redirect_back_or(default)
+    # logger.info "XXX before redirect, session[:return_to] = [#{session[:return_to]}]"
     redirect_to(session[:return_to] || default)
     session.delete(:return_to)
+    # logger.info "XXX after delete, session[:return_to] = [#{session[:return_to]}]"
   end
 
   def store_location

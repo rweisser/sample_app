@@ -71,6 +71,20 @@ describe "Authentication" do
           it "should render the desired protected page" do
             expect(page).to have_correct_title_for('Edit user')
           end
+
+          describe "and then signing out and signing in again" do
+            before do
+              click_link "Sign out"
+              visit new_session_path
+              fill_in "Email",    with: user.email
+              fill_in "Password", with: user.password
+              click_button "Sign in"
+            end
+
+            it "should not render the protected page" do
+              expect(page).to have_correct_title_for(user.name)
+            end
+          end
         end
       end
     end

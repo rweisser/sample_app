@@ -2317,3 +2317,6 @@ was nothing to commit.
 *** Discovered that I had skipped the Friendly Forwarding section (9.2.3).
 Revisited it.
 
+Finished exercise 9.6.8 without looking at the solution provided.  My solution
+was identical to the author's, except that I used one of my custom matchers.
+
