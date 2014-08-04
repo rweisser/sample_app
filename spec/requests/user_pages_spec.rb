@@ -49,10 +49,9 @@ describe "UserPages" do
           end.to change(User, :count).by(-1)
         end
   
-        # Doesn't work yet:
-        # it "should be able to delete another user (2)" do
-        #   expect('delete').to destroy(User, match: :first)
-        # end
+        it "should be able to delete another user (2)" do
+          expect('delete').to destroy(User, match: :first)
+        end
   
         it "should be able to delete another user (3)" do
           expect('delete').to destroy_first(User)

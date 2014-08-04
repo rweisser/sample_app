@@ -5,7 +5,9 @@ class UsersController < ApplicationController
   before_action :not_signed_in,  only: [:new, :create]
 
   def index
-    @users = User.paginate(page: params[:page])
+    # I had to add order(:id).  I'm not sure why postgres doesn't
+    # retrieve the rows in id order.
+    @users = User.order(:id).paginate(page: params[:page])
   end
 
   def show
@@ -40,9 +42,16 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "User deleted."
-    redirect_to users_url
+    user = User.find(params[:id])
+    if current_user?(user)
+      @users = User.order(:id).paginate(page: params[:page])
+      flash.now[:error] = "Can not delete self"
+      render 'index'
+    else
+      user.destroy
+      flash[:success] = "User deleted."
+      redirect_to users_url
+    end
   end
 
   private
@@ -57,9 +66,6 @@ class UsersController < ApplicationController
     # Before filters
 
     def signed_in_user
-      # puts "in signed_in_user"
-      # puts "current user = #{current_user}"
-      # puts "current user signed in? = #{signed_in?}"
       unless signed_in?
         store_location
         redirect_to signin_url, notice: "Please sign in."
@@ -76,9 +82,6 @@ class UsersController < ApplicationController
     end
 
     def not_signed_in
-      # puts "in NOT_signed_in"
-      # puts "current user = #{current_user}"
-      # puts "current user signed in? = #{signed_in?}"
       redirect_to root_url if signed_in?
     end
 end

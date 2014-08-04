@@ -3,7 +3,7 @@ require 'spec_helper'
 describe User do
   
   before do
-    # Can't user create_new_user, because we don't want to save @user.
+    # Can't use create_new_user, because we don't want to save @user.
     @user = User.new(
       name:                  "Example User",
       email:                 "user@example.com",
@@ -143,3 +143,4 @@ describe User do
     its(:remember_token) { should_not be_blank }
   end
 end
+

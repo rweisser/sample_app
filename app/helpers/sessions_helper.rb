@@ -5,7 +5,6 @@ module SessionsHelper
     cookies.permanent[:remember_token] = remember_token
     # update_attributes avoids validations.
     user.update_attribute(:remember_token, User.digest(remember_token))
-    # puts "in sign_in, self = #{self}"
     self.current_user = user
   end
 
@@ -34,10 +33,8 @@ module SessionsHelper
   end
 
   def redirect_back_or(default)
-    # logger.info "XXX before redirect, session[:return_to] = [#{session[:return_to]}]"
     redirect_to(session[:return_to] || default)
     session.delete(:return_to)
-    # logger.info "XXX after delete, session[:return_to] = [#{session[:return_to]}]"
   end
 
   def store_location

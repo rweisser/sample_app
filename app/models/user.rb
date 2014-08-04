@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  default_scope { order :id }
+  # default_scope { order :id }  (caused problem when I wanted a
+  #                               different sort order)
 
   before_save   { email.downcase! }
   before_create :create_remember_token
@@ -26,6 +27,7 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
+  # For testing:
   def to_s
     <<EOS
 User

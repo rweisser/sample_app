@@ -9,6 +9,47 @@ Issues
   Would then hae to override the app version of sign_in with the test version.
   The sample app code on github (see Notes below) does not have the solution.
 
+  SOLVED!  I wrote copybara instead of capybara in the test
+  "Authentication authorization for signed-in users in the Users controller".
+
+  ***
+
+  Problem 9.6.9.  Similar to 9.6.6.  The tests won't work.  The output from
+  the tests is in a section labeled "Test output and log entries for 9.6.9".
+  From the log output, it looks as though the signed_in_user before action
+  is preventing entry into the User#destroy action.  My current presumption
+  is the following:  The test sign_in method, in
+  spec/support/helpers/authentication_helper.rb, does not set current user,
+  nor does it seem possible for it to do so.  Therefore, the signed_in_user
+  redirects before entry into the Users#destroy action.
+
+  So the question is:  How to test?  I can test the actual app as follows:
+  Create an admin user with the rails console or psql.  Have him delete
+  himself.  Modify the User#destroy method to dis-allow this and do it
+  again.  Unfortunately, THIS WON'T WORK, because he will have no delete
+  button for himself.
+
+  Or:
+
+  Temporarily comment the code which disallows delete buttons for the
+  current user, test, and then uncomment the code which disallows the
+  delete button for the current user.
+  
+  Or:
+
+  Perhaps rspec mocks can provide a current_user method which always
+  returns true.
+
+  SOLVED!  See "Test output and log entries for 9.6.9".  Note that
+  the before actions may not have been the problem.  It also may be
+  related to the problem with 9.6.6 (above), although I found the
+  solution to that one after I found the solution for 9.6.9.
+
+To do
+
+        Learn about rspec mocks.
+  done  Revisit earlier tests which don't work.
+
 Notes
 
   Helper modules are automatically included in views, but not in controllers.
@@ -2319,4 +2360,176 @@ Revisited it.
 
 Finished exercise 9.6.8 without looking at the solution provided.  My solution
 was identical to the author's, except that I used one of my custom matchers.
+
+*** I am having a problem with the tests for 9.6.9.  It's probably the same
+problem I had with the tests for 9.6.6.  I will defer it for now and add it
+the issues list at the top of these notes.
+
+************************************************************************
+Test output and log entries for 9.6.9
+
+* Test ouput:
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rspec \
+         -fd spec/requests/authentication_pages_spec.rb     \
+         -e "Authentication authorization as admin user"
+Run options: include {:full_description=>/Authentication\ authorization\ as\ admin\ user/}
+
+Authentication
+  authorization
+    as admin user
+      can delete another user
+        should redirect to "http://www.example.com/users" (FAILED - 1)
+
+Failures:
+
+  1) Authentication authorization as admin user can delete another user 
+     Failure/Error: specify { expect(response).to redirect_to(users_url) }
+       Expected response to be a redirect to <http://www.example.com/users>
+         but was a redirect to <http://www.example.com/signin>.
+       Expected "http://www.example.com/users" to be === "http://www.example.com/signin".
+     # ./spec/requests/authentication_pages_spec.rb:184:in `block (5 levels)
+       in <top (required)>'
+
+Finished in 1.22 seconds
+1 example, 1 failure
+
+Failed examples:
+
+rspec ./spec/requests/authentication_pages_spec.rb:184 # Authentication
+     authorization as admin user can delete another user 
+
+Randomized with seed 12050
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+* Log output.  Note that the output from the logger.info call in
+               User#destroy never appeared.
+
+Started DELETE "/users/1098" for 127.0.0.1 at 2014-08-03 10:41:24 -0400
+Processing by UsersController#destroy as HTML
+  Parameters: {"id"=>"1098"}
+  ^[[1m^[[35mUser Load (0.3ms)^[[0m  SELECT "users".* FROM "users" WHERE
+"users"."remember_token" = 'da39a3ee5e6b4b0d3255bfef95601890afd80709' LIMIT 1
+Redirected to http://www.example.com/signin
+Filter chain halted as :signed_in_user rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.3ms)
+  ^[[1m^[[36m (0.2ms)^[[0m  ^[[1mROLLBACK^[[0m
+
+SOLUTION!
+
+  The sign_in method in the tests doesn't (can't?) set the current user
+  properly (but see below).  Therefore, for this test I did the following:
+
+    Commented out the before actions in users_controller.rb.
+
+    Wrote the following tests "as admin user" in
+    authentication_pages_spec.rb:
+
+        describe "as admin user" do                                     
+          let(:admin) { create_new_admin }                              
+          let(:user)  { create_new_user }                               
+          before { sign_in admin, no_capybara: true }                   
+                                                                        
+          describe "can delete another user" do                         
+            before  { delete user_path(user) }                          
+            specify { expect(response).to redirect_to(users_url) }      
+          end                                                           
+                                                                        
+          describe "can not delete himself" do                          
+            let(:msg) { 'Can not delete self' }                         
+            before  { delete user_path(admin) }                         
+                                                                        
+            specify { expect(response.body).to match(msg) }             
+          end                                                           
+        end                                                             
+
+    Since I had not yet changed the code, the second test failed.
+
+    Modified the User#destroy action:
+
+        def destroy                                                            
+          logger.info "XXX - in destroy, id = #{params[:id]}"                  
+          user = User.find(params[:id])                                        
+          if current_user?(user)                                               
+            puts "XXX no destroy"                                              
+            puts "XXX #{user.id} #{current_user.id}"                           
+            @users = User.order(:id).paginate(page: params[:page])             
+            flash.now[:error] = "Can not delete self"                          
+            render 'index'                                                     
+          else                                                                 
+            puts "XXX destroy"                                                 
+            puts "XXX #{user.id} #{current_user.id}"                           
+            user.destroy                                                       
+            flash[:success] = "User deleted."                                  
+            redirect_to users_url                                              
+          end                                                                  
+        end                                                                    
+
+    With the puts statements, I could see from the ids that I was
+    testing the scenarios correctly.  Here is part of the output,
+    from which it is clear that user ids are the same in the if
+    branch and different in the else branch:
+
+        Authentication
+          authorization
+            as admin user
+              can not delete himself
+        XXX no destroy
+        XXX 2907 2907
+                should match "Can not delete self"
+              can delete another user
+        XXX destroy
+        XXX 2909 2908
+                should redirect to "http://www.example.com/users"
+
+    Now that the tests are working, I unfortunately had to stop them
+    from working.
+
+    I uncommented the before actions in user_controller.rb.
+
+    I commented out the tests "as admin user" in
+    authentication_pages_spec.rb, since the before actions prevent
+    them from working.
+
+    I removed the logger.info and puts calls from User#destroy.
+
+    I am satisfied that my code is working and properly tested.  It
+    was a lot of work to prevent an unlikely possibility.  Indeed,
+    it is impossible using the ui.
+
+    This situation seems like a question for Stack Overflow.
+
+IMPORTANT NOTE:
+
+    By accident, I found out the following:
+
+    Even though the sign_in method in
+    spec/support/helpers/authentication_helper.rb does not set
+    current_user correctly, the current_user? method still works.
+    So I didn't have to comment out my tests.  I am going to revisit
+    earlier tests which did not work because of current_user.
+
+************************************************************************
+
+I modified my custom create, destroy, and destroy_first matchers to
+work with either a button or a link, using the following method,
+which all of them call:
+
+    # First tries to click a button.  If there is no button which
+    # matches element, tries to click a link.
+    def click(element, options)
+      click_button element, options
+    rescue
+      click_link element, options
+    end
+
+I must apologize to Michael Hartl for accusing him (to myself) of
+asking me to write impossible tests.  Most of the problems must
+have come from mispelling no_capybara.  Of course, there is no
+sanity checking when passing an options hash to a method.
+
+Now it is time -- finally -- to close out chapter 9.  I am going to
+repopulate the data base, since I deleted one of my precious users
+and added an unnecessary additional admin.
 

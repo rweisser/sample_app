@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     else
       # NOTE: need flash.now instead of just flash.  Otherwise,
       # the flash will persist past the next request.  Render
-      # does not count as a request.Lw
+      # does not count as a request.
       flash.now[:error] = 'Invalid email/password combination'
       render 'new'
     end
