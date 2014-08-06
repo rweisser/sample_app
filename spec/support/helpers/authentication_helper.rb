@@ -25,16 +25,19 @@ module AuthenticationHelper
     fill_in "Confirm Password", with: "foobar"
   end
   
-  def create_new_user(options = {})
+  def create_user(options = {})
     FactoryGirl.create(:user, options)
   end
   
-  def create_new_users(n)
-    n.times { create_new_user }
+  def create_users(n, options = {})
+    n.times { create_user options}
   end
   
-  def create_new_admin(options = {})
+  def create_admin(options = {})
     FactoryGirl.create(:admin, options)
   end
 
+  def create_micropost(options = {})
+    FactoryGirl.create(:micropost, options)
+  end
 end

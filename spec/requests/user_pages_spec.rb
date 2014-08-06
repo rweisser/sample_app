@@ -5,7 +5,7 @@ describe "UserPages" do
   subject { page }
 
   describe "index" do
-    let(:user) { create_new_user }
+    let(:user) { create_user }
     before(:each) do
       sign_in user
       visit users_path
@@ -16,7 +16,7 @@ describe "UserPages" do
 
     describe "pagination" do
 
-      before(:all) { create_new_users 30 }
+      before(:all) { create_users 30 }
       after(:all)  { User.delete_all }
 
       it { should have_selector('div.pagination') }
@@ -32,7 +32,7 @@ describe "UserPages" do
       it { should_not have_link('delete') }
   
       describe "as an admin user" do
-        let(:admin) { create_new_admin }
+        let(:admin) { create_admin }
         before do
           sign_in admin
           visit users_path
@@ -63,11 +63,20 @@ describe "UserPages" do
   end
 
   describe "profile page" do
-    let(:user) { create_new_user }
+    let(:user) { create_user }
+    let!(:m1) { create_micropost(user: user, content: "Foo") }
+    let!(:m2) { create_micropost(user: user, content: "Bar") }
+
     before { visit user_path(user) }
 
     it { should have_content(user.name) }
     it { should have_correct_title_for(user.name) }
+
+    describe "microposts" do
+      it { should have_content(m1.content) }
+      it { should have_content(m2.content) }
+      it { should have_content(user.microposts.count) }
+    end
   end
 
   describe "signup page" do
@@ -135,7 +144,7 @@ describe "UserPages" do
   end
 
   describe "edit" do
-    let(:user) { create_new_user }
+    let(:user) { create_user }
     before do
       sign_in user
       visit edit_user_path(user)

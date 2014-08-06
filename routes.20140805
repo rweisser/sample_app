@@ -11,6 +11,8 @@
    sessions POST   /sessions(.:format)       sessions#create
 new_session GET    /sessions/new(.:format)   sessions#new
     session DELETE /sessions/:id(.:format)   sessions#destroy
+ microposts POST   /microposts(.:format)     microposts#create
+  micropost DELETE /microposts/:id(.:format) microposts#destroy
      signup GET    /signup(.:format)         users#new
      signin GET    /signin(.:format)         sessions#new
     signout DELETE /signout(.:format)        sessions#destroy

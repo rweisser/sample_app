@@ -37,7 +37,7 @@ describe "Authentication" do
     end
 
     describe "with valid information" do
-      let(:user) { create_new_user }
+      let(:user) { create_user }
       before { sign_in(user) }
 
       it { should     have_correct_title_for(user.name) }
@@ -57,7 +57,7 @@ describe "Authentication" do
   describe "authorization" do
 
     describe "for non-signed-in users" do
-      let(:user) { create_new_user }
+      let(:user) { create_user }
 
       describe "when attempting to visit a protected page" do
         before do
@@ -106,10 +106,23 @@ describe "Authentication" do
           it { should have_correct_title_for('Sign in') }
         end
       end
+
+      describe "in the Microposts controller" do
+
+        describe "submitting to the create action" do
+          before { post microposts_path }
+          specify { expect(response).to redirect_to(signin_path) }
+        end
+
+        describe "submitting to the create action" do
+          before { delete micropost_path(create_micropost) }
+          specify { expect(response).to redirect_to(signin_path) }
+        end
+      end
     end
 
     describe "for signed-in users" do
-      let(:user) { create_new_user }
+      let(:user) { create_user }
       let(:new_user) { FactoryGirl.attributes_for :user }
       before { sign_in user, no_capybara: true }
      
@@ -128,8 +141,8 @@ describe "Authentication" do
     end
 
     describe "as wrong user" do
-      let(:user)       { create_new_user }
-      let(:wrong_user) { create_new_user email: "wrong@example.com" }
+      let(:user)       { create_user }
+      let(:wrong_user) { create_user email: "wrong@example.com" }
       before { sign_in user, no_capybara: true }
 
       describe "submitting a GET request to the Users#edit action" do
@@ -145,8 +158,8 @@ describe "Authentication" do
     end
 
     describe "as non-admin user" do
-      let(:user)      { create_new_user }
-      let(:non_admin) { create_new_user }
+      let(:user)      { create_user }
+      let(:non_admin) { create_user }
 
       before { sign_in non_admin, no_capybara: true }
 
@@ -157,8 +170,8 @@ describe "Authentication" do
     end
 
     describe "as admin user" do
-      let(:admin) { create_new_admin }
-      let(:user)  { create_new_user }
+      let(:admin) { create_admin }
+      let(:user)  { create_user }
       before { sign_in admin, no_capybara: true }
     
       describe "can delete another user" do

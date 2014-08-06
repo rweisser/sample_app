@@ -25,6 +25,22 @@ describe "Static pages" do
 
     it_should_behave_like "all static pages"
     it { should_not have_title('| Home') }
+
+    describe "for signed-in users" do
+      let(:user) { create_user }
+      before do
+        create_micropost user: user, content: "Lorem ipsum"
+        create_micropost user: user, content: "Dolor sit amet"
+        sign_in user
+        visit root_path
+      end
+      
+      it "should render the user's feed" do
+        user.feed.each do |item|
+          expect(page).to have_selector("li##{item.id}", text: item.content)
+        end
+      end
+    end
   end
 
   describe "Help page" do
