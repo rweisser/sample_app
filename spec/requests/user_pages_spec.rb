@@ -16,7 +16,7 @@ describe "UserPages" do
 
     describe "pagination" do
 
-      before(:all) { create_users 30 }
+      before(:all) { 30.times { create_user } }
       after(:all)  { User.delete_all }
 
       it { should have_selector('div.pagination') }

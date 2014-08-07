@@ -41,6 +41,49 @@ describe "Static pages" do
         end
       end
     end
+
+    describe "sidebar" do
+      let(:user) { create_user }
+
+      describe "with no microposts" do
+        before do
+          sign_in user
+          visit root_url
+        end
+
+        it { should have_content "0 microposts" }
+      end
+
+      describe "with one micropost" do
+        before do
+          create_micropost user: user
+          sign_in user
+          visit root_url
+        end
+
+        it { should have_content "1 micropost" }
+      end
+
+      describe "with two micropost" do
+        before do
+          2.times { create_micropost user: user }
+          sign_in user
+          visit root_url
+        end
+
+        it { should have_content "2 microposts" }
+      end
+
+      describe "with ten micropost" do
+        before do
+          10.times { create_micropost user: user }
+          sign_in user
+          visit root_url
+        end
+
+        it { should have_content "10 microposts" }
+      end
+    end
   end
 
   describe "Help page" do

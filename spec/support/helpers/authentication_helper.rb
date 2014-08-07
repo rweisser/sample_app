@@ -26,18 +26,14 @@ module AuthenticationHelper
   end
   
   def create_user(options = {})
-    FactoryGirl.create(:user, options)
-  end
-  
-  def create_users(n, options = {})
-    n.times { create_user options}
+    FactoryGirl.create :user, options
   end
   
   def create_admin(options = {})
-    FactoryGirl.create(:admin, options)
+    FactoryGirl.create :admin, options
   end
 
   def create_micropost(options = {})
-    FactoryGirl.create(:micropost, options)
+    FactoryGirl.create :micropost, options
   end
 end
