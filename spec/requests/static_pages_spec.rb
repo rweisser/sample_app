@@ -48,7 +48,7 @@ describe "Static pages" do
       describe "with no microposts" do
         before do
           sign_in user
-          visit root_url
+          visit root_path
         end
 
         it { should have_content "0 microposts" }
@@ -58,30 +58,46 @@ describe "Static pages" do
         before do
           create_micropost user: user
           sign_in user
-          visit root_url
+          visit root_path
         end
 
         it { should have_content "1 micropost" }
       end
 
-      describe "with two micropost" do
+      describe "with two microposts" do
         before do
           2.times { create_micropost user: user }
           sign_in user
-          visit root_url
+          visit root_path
         end
 
         it { should have_content "2 microposts" }
       end
 
-      describe "with ten micropost" do
+      describe "with ten microposts" do
         before do
           10.times { create_micropost user: user }
           sign_in user
-          visit root_url
+          visit root_path
         end
 
         it { should have_content "10 microposts" }
+      end
+
+      describe "micropost pagination" do
+        before do
+          create_numbered_microposts 50, user: user, content: 'Test' 
+          sign_in user
+          visit root_path
+        end
+
+        it { should have_content "50 microposts" }
+
+        it "should list each micropost in descending order of creation" do
+          Micropost.paginate(page: 1).each_with_index do | micropost, n |
+            expect(page).to have_selector 'li', text: "#{50 - n}. Test"
+          end
+        end
       end
     end
   end

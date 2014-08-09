@@ -5,10 +5,44 @@ describe "MicropostPages" do
   subject { page }
 
   let(:user) { create_user }
-  before { sign_in user }
+
+  shared_examples_for "micropost pagination" do
+    before do
+      create_numbered_microposts 50, user: user, content: 'Test' 
+      sign_in user
+      visit path
+    end
+
+    it { should have_content(content) }
+
+    it "should list each micropost" do
+      Micropost.paginate(page: 1).each_with_index do | micropost, n |
+        expect(page).to have_selector 'li', text: "#{50 - n}. Test"
+      end
+    end
+  end
+
+#  shared_examples_for "micropost pagination" do
+#    before do
+#      user = create_user
+#      create_numbered_microposts 50, user: user, content: 'Test' 
+#      sign_in user
+#    end
+#
+#    it { should have_content(content) }
+#
+#    it "should list each micropost" do
+#      Micropost.paginate(page: 1).each_with_index do | micropost, n |
+#        expect(page).to have_selector 'li', text: "#{50 - n}. Test"
+#      end
+#    end
+#  end
 
   describe "micropost creation" do
-    before { visit root_path }
+    before do
+      sign_in user
+      visit root_path
+    end
 
     describe "with invalid information" do
 
@@ -33,7 +67,10 @@ describe "MicropostPages" do
   end
 
   describe "micropost destruction" do
-    before { create_micropost user: user }
+    before do
+      sign_in user
+      create_micropost user: user 
+    end
 
     describe "as correct user" do
       before { visit root_path }
@@ -43,4 +80,22 @@ describe "MicropostPages" do
       end
     end
   end
+
+  describe "pagination" do
+
+    describe "on the home page" do
+      let(:content) { "50 microposts" }
+      let(:path)    { root_path }
+
+      it_should_behave_like "micropost pagination"
+    end
+
+    describe "on the user profile page" do
+      let(:content) { "Microposts (50)" }
+      let(:path)    { user_path user }
+
+      it_should_behave_like "micropost pagination"
+    end
+  end
 end
+

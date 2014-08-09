@@ -2,19 +2,29 @@ Commands used in the sample_app project.  Also a log of changes.
 
 Issues
 
-  Problem 9.6.6.  Got redirect new to root path to work in app.  Have to assume
-  it works for create also, but could not test.  In rspec, could not get either
-  one to work, because signed_in? always returns false.  Not sure if it is
-  possible.  One thing to try:  include SessionsHelper in support/utilities.rb.
-  Would then hae to override the app version of sign_in with the test version.
-  The sample app code on github (see Notes below) does not have the solution.
+  Problem 10.5.2.  I did the problem but my solution causes
+  create_numbered_microposts(50) to be called 4 times.  The code is in
+  micropost_pages_spec.rb.  I could not figure out how to get around it.
+  When I tried before(:all), I got a deprecation warning for using a let
+  variable.  After trying several combinations of things, all of which
+  failed or provoked the warning, I gave up.
+
+  ***
+
+  Problem 9.6.6 (SOLVED).  Got redirect new to root path to work in app.
+  Have to assume it works for create also, but could not test.  In
+  rspec, could not get either one to work, because signed_in? always
+  returns false.  Not sure if it is possible.  One thing to try:
+  include SessionsHelper in support/utilities.rb.  Would then hae to
+  override the app version of sign_in with the test version.  The sample
+  app code on github (see Notes below) does not have the solution.
 
   SOLVED!  I wrote copybara instead of capybara in the test
   "Authentication authorization for signed-in users in the Users controller".
 
   ***
 
-  Problem 9.6.9.  Similar to 9.6.6.  The tests won't work.  The output from
+  Problem 9.6.9 (SOLVED).  Similar to 9.6.6.  The tests won't work.  The output from
   the tests is in a section labeled "Test output and log entries for 9.6.9".
   From the log output, it looks as though the signed_in_user before action
   is preventing entry into the User#destroy action.  My current presumption
@@ -2843,4 +2853,11 @@ Stopped the server.  (This time I remembered.)
 Renamed create_new_user to create_user and create_new_micropost to
 create_micropost.  I realized that "new" was superfluous.  When you
 create something, it is automatically new.
+
+Integration tests for microposts:
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ rails g integration_test micropost_pages
+      invoke  rspec
+      create    spec/requests/micropost_pages_spec.rb
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
 

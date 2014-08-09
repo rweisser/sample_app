@@ -36,4 +36,13 @@ module AuthenticationHelper
   def create_micropost(options = {})
     FactoryGirl.create :micropost, options
   end
+
+  def create_numbered_microposts(n, options = {})
+    puts "*** in create_numbered_microposts ***"
+    base_content = options[:content] || "Lorem ipsum"
+    1.upto(n) do |i|
+      new_content = "#{i}. #{base_content}"
+      create_micropost options.merge(content: new_content)
+    end
+  end
 end

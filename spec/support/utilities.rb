@@ -5,4 +5,3 @@ include AuthenticationHelper
 # Helpers for authentication tests are in the
 # AuthenticationHelper module in spec/support/helpers
 #   (not in spec/helpers).
-
