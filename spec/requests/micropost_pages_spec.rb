@@ -22,22 +22,6 @@ describe "MicropostPages" do
     end
   end
 
-#  shared_examples_for "micropost pagination" do
-#    before do
-#      user = create_user
-#      create_numbered_microposts 50, user: user, content: 'Test' 
-#      sign_in user
-#    end
-#
-#    it { should have_content(content) }
-#
-#    it "should list each micropost" do
-#      Micropost.paginate(page: 1).each_with_index do | micropost, n |
-#        expect(page).to have_selector 'li', text: "#{50 - n}. Test"
-#      end
-#    end
-#  end
-
   describe "micropost creation" do
     before do
       sign_in user

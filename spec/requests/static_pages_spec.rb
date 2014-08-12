@@ -83,22 +83,6 @@ describe "Static pages" do
 
         it { should have_content "10 microposts" }
       end
-
-      describe "micropost pagination" do
-        before do
-          create_numbered_microposts 50, user: user, content: 'Test' 
-          sign_in user
-          visit root_path
-        end
-
-        it { should have_content "50 microposts" }
-
-        it "should list each micropost in descending order of creation" do
-          Micropost.paginate(page: 1).each_with_index do | micropost, n |
-            expect(page).to have_selector 'li', text: "#{50 - n}. Test"
-          end
-        end
-      end
     end
   end
 
