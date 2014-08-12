@@ -53,7 +53,7 @@ describe "MicropostPages" do
   describe "micropost destruction" do
     before do
       sign_in user
-      create_micropost user: user 
+      create_micropost user: user, content: 'post from user 1'
     end
 
     describe "as correct user" do
@@ -62,6 +62,18 @@ describe "MicropostPages" do
       it "should delete a micropost" do
         expect('delete').to destroy(Micropost)
       end
+    end
+
+    describe "as different user" do
+      let(:user2) { create_user }
+      before do
+        create_micropost user: user2, content: 'post from user 2'
+        visit user_path(user2)
+      end
+
+      it { should     have_content('post from user 2') }
+      it { should_not have_content('post from user 1') }
+      it { should_not have_selector('delete', text: 'post from user 2') }
     end
   end
 

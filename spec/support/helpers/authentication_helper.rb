@@ -38,7 +38,6 @@ module AuthenticationHelper
   end
 
   def create_numbered_microposts(n, options = {})
-    puts "*** in create_numbered_microposts ***"
     base_content = options[:content] || "Lorem ipsum"
     1.upto(n) do |i|
       new_content = "#{i}. #{base_content}"
