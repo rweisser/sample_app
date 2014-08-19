@@ -44,7 +44,7 @@ Issues
   Temporarily comment the code which disallows delete buttons for the
   current user, test, and then uncomment the code which disallows the
   delete button for the current user.
-  
+
   Or:
 
   Perhaps rspec mocks can provide a current_user method which always
@@ -82,7 +82,7 @@ Users
 CL = Checklist
 
 [~/self/rails/tutorials/hartl/rails4]$ rails new sample_app --skip-test-unit
-      create  
+      create
       create  README.rdoc
       create  Rakefile
       create  config.ru
@@ -193,7 +193,7 @@ Using turbolinks 2.2.2
 Using uglifier 2.5.0
 Your bundle is complete!
 Use `bundle show [gemname]` to see where a bundled gem is installed.
-[~/self/rails/tutorials/hartl/rails4]$ 
+[~/self/rails/tutorials/hartl/rails4]$
 
 Updated the Gemfile.  Listing 3.1.
 Updated .gitignore.  Listing 1.7.
@@ -208,7 +208,7 @@ Fetching gem metadata from https://rubygems.org/.........
 Fetching additional metadata from https://rubygems.org/..
 Resolving dependencies...
 Could not find gem 'cabybara (= 2.1.0) ruby' in the gems available on this machine.
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 So I had to get capybara.
 
@@ -293,7 +293,7 @@ Parsing documentation for xpath-2.0.0
 Installing ri documentation for xpath-2.0.0
 Done installing documentation for capybara, mini_portile, nokogiri, xpath after 10 seconds
 4 gems installed
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Then I tried bundle install again:
 
@@ -302,7 +302,7 @@ Fetching gem metadata from https://rubygems.org/.........
 Fetching additional metadata from https://rubygems.org/..
 Resolving dependencies...
 Could not find gem 'cabybara (= 2.1.0) ruby' in the gems available on this machine.
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Still didn't work, even though gem list shows:
 
@@ -375,7 +375,7 @@ Using uglifier 2.1.1 (was 2.5.0)
 Your bundle is complete!
 Gems in the group production were not installed.
 Use `bundle show [gemname]` to see where a bundled gem is installed.
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ bundle update
 Fetching gem metadata from https://rubygems.org/.........
@@ -440,7 +440,7 @@ Using turbolinks 1.1.1
 Using uglifier 2.1.1
 Your bundle is updated!
 Gems in the group production were not installed.
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ bundle install
 Using rake 10.3.2
@@ -503,7 +503,7 @@ Using uglifier 2.1.1
 Your bundle is complete!
 Gems in the group production were not installed.
 Use `bundle show [gemname]` to see where a bundled gem is installed.
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Note that bundle install remembered the --without production option.
 
@@ -515,7 +515,7 @@ Installed rspec:
       create  .rspec
       create  spec
       create  spec/spec_helper.rb
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Initialize git:
 
@@ -573,14 +573,14 @@ Initialized empty Git repository in /Users/rpw/self/rails/tutorials/hartl/rails4
  create mode 100644 spec/spec_helper.rb
  create mode 100644 vendor/assets/javascripts/.keep
  create mode 100644 vendor/assets/stylesheets/.keep
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Changed the README file, renamed it using git to .md, committed.
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ git remote add origin https://github.com/rweisser/sample_app.git
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ git push -u origin master
 Username for 'https://github.com': rweisser
-Password for 'https://rweisser@github.com': 
+Password for 'https://rweisser@github.com':
 Counting objects: 64, done.
 Delta compression using up to 8 threads.
 Compressing objects: 100% (51/51), done.
@@ -589,7 +589,7 @@ Total 64 (delta 3), reused 0 (delta 0)
 To https://github.com/rweisser/sample_app.git
  * [new branch]      master -> master
 Branch master set up to track remote branch master from origin.
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Set up heroku:
 
@@ -692,7 +692,7 @@ To git@heroku.com:cryptic-basin-4588.git
  * [new branch]      master -> master
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ heroku run rake db:migrate
 Running `rake db:migrate` attached to terminal... up, run.9835
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Save heroku info in heroku_address.
 
@@ -717,9 +717,9 @@ Switched to a new branch 'static-pages'
       create      app/assets/javascripts/static_pages.js.coffee
       invoke    scss
       create      app/assets/stylesheets/static_pages.css.scss
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
- [~/self/rails/tutorials/hartl/rails4/sample_app]$ git add . 
+ [~/self/rails/tutorials/hartl/rails4/sample_app]$ git add .
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ git commit -m "Add a StaticPages controller"
 [static-pages 80eeb82] Add a StaticPages controller
  9 files changed, 235 insertions(+)
@@ -730,14 +730,14 @@ Switched to a new branch 'static-pages'
  create mode 100644 app/views/static_pages/help.html.erb
  create mode 100644 app/views/static_pages/home.html.erb
  create mode 100644 heroku_address
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Created integration tests for StaticPages controller:
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ rails generate integration_test static_pages
       invoke  rspec
       create    spec/requests/static_pages_spec.rb
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 NOTE:  rspec calls integration tests "request specs."  They test user interaction
        through a browser.
@@ -798,7 +798,7 @@ sprockets 2.11.0
 thor 0.19.1
 tilt 1.4.1
 treetop 1.4.15
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Note:  rubygems-bundler left me with only 3 pgms in bin:  bundle, rails,
 and rake.
@@ -832,7 +832,7 @@ drwxr-xr-x  26 rpw  staff  884 Jun 13 17:25 ..
 -rwxr-xr-x   1 rpw  staff  364 Jun 13 17:34 thor
 -rwxr-xr-x   1 rpw  staff  364 Jun 13 17:34 tilt
 -rwxr-xr-x   1 rpw  staff  363 Jun 13 17:34 tt
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Added the guard gem:
 
@@ -945,7 +945,7 @@ drwxr-xr-x  26 rpw  staff  884 Jun 13 17:41 ..
 -rwxr-xr-x   1 rpw  staff  364 Jun 13 17:41 thor
 -rwxr-xr-x   1 rpw  staff  364 Jun 13 17:41 tilt
 -rwxr-xr-x   1 rpw  staff  363 Jun 13 17:41 tt
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Note that now there is a bin/guard pgm.
 
@@ -954,7 +954,7 @@ Initialize it:
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/guard init rspec
 17:44:27 - INFO - Writing new Guardfile to /Users/rpw/self/rails/tutorials/hartl/rails4/sample_app/Guardfile
 17:44:27 - INFO - rspec guard added to Guardfile, feel free to edit it
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Then I edited the guardfile.
 
@@ -1128,7 +1128,7 @@ Using uglifier 2.1.1
 Your bundle is complete!
 Gems in the group production were not installed.
 Use `bundle show [gemname]` to see where a bundled gem is installed.
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Note the error message about the childprocess gem version.
 
@@ -1207,7 +1207,7 @@ You have requested:
 
 The bundle currently has sprockets locked at 2.12.1.
 Try running `bundle update sprockets`
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ bundle update sprockets
 Fetching gem metadata from https://rubygems.org/.........
@@ -1290,7 +1290,7 @@ Using turbolinks 1.1.1
 Using uglifier 2.1.1
 Your bundle is updated!
 Gems in the group production were not installed.
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ bundle install
 Using rake 10.3.2
@@ -1371,7 +1371,7 @@ Using uglifier 2.1.1
 Your bundle is complete!
 Gems in the group production were not installed.
 Use `bundle show [gemname]` to see where a bundled gem is installed.
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Modified config/application.rb.  Added:
 
@@ -1398,7 +1398,7 @@ out the word Users.  I reversed the generate with destroy:
       create      app/assets/javascripts/new.js.coffee
       invoke    scss
       create      app/assets/stylesheets/new.css.scss
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ rails d controller new --no-test-framework
       remove  app/controllers/new_controller.rb
@@ -1411,7 +1411,7 @@ out the word Users.  I reversed the generate with destroy:
       remove      app/assets/javascripts/new.js.coffee
       invoke    scss
       remove      app/assets/stylesheets/new.css.scss
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Note: rails d == rails destroy.
 
@@ -1430,12 +1430,12 @@ Then I did it right:
       create      app/assets/javascripts/users.js.coffee
       invoke    scss
       create      app/assets/stylesheets/users.css.scss
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ rails generate integration_test user_pages
       invoke  rspec
       create    spec/requests/user_pages_spec.rb
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 At the end of Chapter 5, after committing, merging, and pushing, I started
 getting
@@ -1459,7 +1459,7 @@ Finished in 3.14 seconds
 
 Randomized with seed 12354
 
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Now for the chapter 5 exercises.
 
@@ -1475,7 +1475,7 @@ User model:
       create    app/models/user.rb
       invoke    rspec
       create      spec/models/user_spec.rb
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Migrated:
 
@@ -1485,7 +1485,7 @@ Migrated:
    -> 0.0686s
 == 20140618203351 CreateUsers: migrated (0.0687s) =============================
 
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Checked that the users table had been created in database sample_app_dev
 and sample_app (prod).  It is not in sample_app_test, which I guess
@@ -1501,7 +1501,7 @@ I added an index in postgres:
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ rails g migration add_index_to_users_email
       invoke  active_record
       create    db/migrate/20140621172413_add_index_to_users_email.rb
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Next I had to add code to db/migrate/20140621172413_add_index_to_users_email.rb.
 Then bin/rake db:migrate.
@@ -1601,10 +1601,10 @@ Using uglifier 2.1.1
 Your bundle is complete!
 Gems in the group production were not installed.
 Use `bundle show [gemname]` to see where a bundled gem is installed.
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 When I ran a test for the as yet non-existent password_digest column, I got
-the message: 
+the message:
 
   /Users/rpw/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/activerecord-4.0.5/
   lib/active_record/migration.rb:383:in `check_pending!': Migrations
@@ -1617,7 +1617,7 @@ a failing test for "should respond to #password_digest."
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ rails g migration
    add_password_digest_to_users password_digest:string
       invoke  active_record
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 This one created the add_column code automatically.
 
@@ -1628,7 +1628,7 @@ This one created the add_column code automatically.
 == 20140621175044 AddPasswordDigestToUsers: migrated (0.1083s) ================
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake test:prepare
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 DON'T FORGET rake test:prepare
 
@@ -1658,7 +1658,7 @@ existed.  db:migrate replayed all three migrations which I had
 rolled back, so I was back to the current situation, but with an
 empty users table.  I added Mr. Hartl back into the table.  He got
 id = 1.  Everything is now okay.
-autoincrement on id. 
+autoincrement on id.
 
 CL. Added factory_girl_rails to Gemfile and then:
 
@@ -1747,7 +1747,7 @@ Using uglifier 2.1.1
 Your bundle is complete!
 Gems in the group production were not installed.
 Use `bundle show [gemname]` to see where a bundled gem is installed.
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Problem:  After adding code to use factory girl in user_pages_spec.rb,
 I got:
@@ -1757,14 +1757,14 @@ I got:
 
 Failures:
 
-  1) UserPages profile page 
+  1) UserPages profile page
      Failure/Error: let(:user) { FactoryGirl.create(:user) }
      ArgumentError:
        Factory not registered: user
      # ./spec/requests/user_pages_spec.rb:8:in `block (3 levels) in <top (required)>'
      # ./spec/requests/user_pages_spec.rb:9:in `block (3 levels) in <top (required)>'
 
-  2) UserPages profile page 
+  2) UserPages profile page
      Failure/Error: let(:user) { FactoryGirl.create(:user) }
      ArgumentError:
        Factory not registered: user
@@ -1776,12 +1776,12 @@ Finished in 2.47 seconds
 
 Failed examples:
 
-rspec ./spec/requests/user_pages_spec.rb:11 # UserPages profile page 
-rspec ./spec/requests/user_pages_spec.rb:12 # UserPages profile page 
+rspec ./spec/requests/user_pages_spec.rb:11 # UserPages profile page
+rspec ./spec/requests/user_pages_spec.rb:12 # UserPages profile page
 
 Randomized with seed 8594
 
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 CL. After some research on StackOverflow, I added
 
@@ -1835,7 +1835,7 @@ Next:
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ git push heroku
 Fetching repository, done.
 Everything up-to-date
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Now I'm not sure if the problem is fixed.  Never mind, I forgot to
 commit my Gemfile changes.  So I committed, pushed to git, then
@@ -1868,7 +1868,7 @@ Migrating to AddPasswordDigestToUsers (20140621175044)
    -> 0.0020s
 == 20140621175044 AddPasswordDigestToUsers: migrated (0.0021s) ================
 
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 CL. Set up ssl on heroku.
 
@@ -1908,14 +1908,14 @@ CL. I using rspec, use --no-test-framework.
       create      app/assets/javascripts/sessions.js.coffee
       invoke    scss
       create      app/assets/stylesheets/sessions.css.scss
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 CL.  Don't forget rspec:
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ rails generate integration_test authentication_pages
       invoke  rspec
       create    spec/requests/authentication_pages_spec.rb
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Possible problem:  After putting
 
@@ -1975,7 +1975,7 @@ Adding remember token to User:
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ rails g migration add_remember_token_to_users
       invoke  active_record
       create    db/migrate/20140629203204_add_remember_token_to_users.rb
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Have to fill in the actual column add and index.
 
@@ -1992,11 +1992,11 @@ in SessionController#create.
 
 CL.  Add bootstrap to assets/javascripts/application.js
 
-    //= require jquery     
-    //= require jquery_ujs 
+    //= require jquery
+    //= require jquery_ujs
     //= require bootstrap    <--
-    //= require turbolinks 
-    //= require_tree .     
+    //= require turbolinks
+    //= require_tree .
 
 The bootstrap lib is available because of the bootstrap-sass gem.
 
@@ -2096,7 +2096,7 @@ Using uglifier 2.1.1
 Your bundle is complete!
 Gems in the group production were not installed.
 Use `bundle show [gemname]` to see where a bundled gem is installed.
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ rails g cucumber:install
       create  config/cucumber.yml
@@ -2110,7 +2110,7 @@ Use `bundle show [gemname]` to see where a bundled gem is installed.
         gsub  config/database.yml
         gsub  config/database.yml
        force  config/database.yml
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Note features dir.
 
@@ -2126,7 +2126,7 @@ Migrating to AddRememberTokenToUsers (20140629203204)
    -> 0.0260s
 == 20140629203204 AddRememberTokenToUsers: migrated (0.0414s) =================
 
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 It would be easy to forget heroku run rake db:migrate
 
@@ -2178,7 +2178,7 @@ spec
 └── views
 
 8 directories, 12 files
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 I had a lot of problems with custom matchers.  I got them to work,
 but I couldn't get the description or the failure messages to work,
@@ -2238,7 +2238,7 @@ CL.  Added faker to Gemfile and did bundle install.
    -> 0.0073s
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake db:populate
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake test:prepare
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Note:  In the book, the first user on the All users page is Example User
 (id 1) followed by the 99 users with random names.  In my app, Example
@@ -2301,7 +2301,7 @@ end
 == 20140721200550 AddAdminToUsers: migrated (0.0313s) =========================
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake test:prepare
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Finished chapter 9.  Had some adventures with the tests in section 9.5.  Leaving
 out the second '_' in create_new_user caused rspec to bail out of the tests without
@@ -2337,7 +2337,7 @@ to User#new and User#create to the root_path.  I got it to work in the app
 by adding a before_action called not_signed_in.  It worked fine.  It calls
 signed_in? to determine if a user is signed in.  When I wrote the tests, I had
 2 problems:
-  
+
   The test for new was failing because the redirect was not happening.  Using puts
   in not_signed_in, I found that signed_in? was always returning false, even
   though I use "before { sign_in user }.  The test version of sign_in does not
@@ -2393,7 +2393,7 @@ Authentication
 
 Failures:
 
-  1) Authentication authorization as admin user can delete another user 
+  1) Authentication authorization as admin user can delete another user
      Failure/Error: specify { expect(response).to redirect_to(users_url) }
        Expected response to be a redirect to <http://www.example.com/users>
          but was a redirect to <http://www.example.com/signin>.
@@ -2407,11 +2407,11 @@ Finished in 1.22 seconds
 Failed examples:
 
 rspec ./spec/requests/authentication_pages_spec.rb:184 # Authentication
-     authorization as admin user can delete another user 
+     authorization as admin user can delete another user
 
 Randomized with seed 12050
 
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 * Log output.  Note that the output from the logger.info call in
                User#destroy never appeared.
@@ -2436,45 +2436,45 @@ SOLUTION!
     Wrote the following tests "as admin user" in
     authentication_pages_spec.rb:
 
-        describe "as admin user" do                                     
-          let(:admin) { create_new_admin }                              
-          let(:user)  { create_new_user }                               
-          before { sign_in admin, no_capybara: true }                   
-                                                                        
-          describe "can delete another user" do                         
-            before  { delete user_path(user) }                          
-            specify { expect(response).to redirect_to(users_url) }      
-          end                                                           
-                                                                        
-          describe "can not delete himself" do                          
-            let(:msg) { 'Can not delete self' }                         
-            before  { delete user_path(admin) }                         
-                                                                        
-            specify { expect(response.body).to match(msg) }             
-          end                                                           
-        end                                                             
+        describe "as admin user" do
+          let(:admin) { create_new_admin }
+          let(:user)  { create_new_user }
+          before { sign_in admin, no_capybara: true }
+
+          describe "can delete another user" do
+            before  { delete user_path(user) }
+            specify { expect(response).to redirect_to(users_url) }
+          end
+
+          describe "can not delete himself" do
+            let(:msg) { 'Can not delete self' }
+            before  { delete user_path(admin) }
+
+            specify { expect(response.body).to match(msg) }
+          end
+        end
 
     Since I had not yet changed the code, the second test failed.
 
     Modified the User#destroy action:
 
-        def destroy                                                            
-          logger.info "XXX - in destroy, id = #{params[:id]}"                  
-          user = User.find(params[:id])                                        
-          if current_user?(user)                                               
-            puts "XXX no destroy"                                              
-            puts "XXX #{user.id} #{current_user.id}"                           
-            @users = User.order(:id).paginate(page: params[:page])             
-            flash.now[:error] = "Can not delete self"                          
-            render 'index'                                                     
-          else                                                                 
-            puts "XXX destroy"                                                 
-            puts "XXX #{user.id} #{current_user.id}"                           
-            user.destroy                                                       
-            flash[:success] = "User deleted."                                  
-            redirect_to users_url                                              
-          end                                                                  
-        end                                                                    
+        def destroy
+          logger.info "XXX - in destroy, id = #{params[:id]}"
+          user = User.find(params[:id])
+          if current_user?(user)
+            puts "XXX no destroy"
+            puts "XXX #{user.id} #{current_user.id}"
+            @users = User.order(:id).paginate(page: params[:page])
+            flash.now[:error] = "Can not delete self"
+            render 'index'
+          else
+            puts "XXX destroy"
+            puts "XXX #{user.id} #{current_user.id}"
+            user.destroy
+            flash[:success] = "User deleted."
+            redirect_to users_url
+          end
+        end
 
     With the puts statements, I could see from the ids that I was
     testing the scenarios correctly.  Here is part of the output,
@@ -2559,13 +2559,13 @@ Shut down rails server.
    -> 0.0025s
 -- initialize_schema_migrations_table()
    -> 0.0053s
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake db:populate
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake test:prepare
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake db:reset
 -- enable_extension("plpgsql")
@@ -2578,18 +2578,18 @@ Shut down rails server.
    -> 0.0025s
 -- initialize_schema_migrations_table()
    -> 0.0053s
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake db:populate
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake test:prepare
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ git add --all
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ git commit \ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ git commit \
      -m "Finish ex. 9.6.9, fix tests, and enhance custom matchers"
 [chapter9-exercises 52530cc] Finish ex. 9.6.9, fix tests, and enhance custom matchers
  12 files changed, 366 insertions(+), 121 deletions(-)
@@ -2600,12 +2600,12 @@ Shut down rails server.
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ git co master
 Switched to branch 'master'
 Your branch is up-to-date with 'origin/master'.
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ git branch -l
   chapter9-exercises
 * master
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ git merge chapter9-exercises
 Updating 4212e3b..52530cc
@@ -2629,15 +2629,15 @@ Fast-forward
  16 files changed, 574 insertions(+), 97 deletions(-)
  create mode 100644 app/views/users/_fields.html.erb
  create mode 100644 routes.20140802
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ git branch -d chapter9-exercises
 Deleted branch chapter9-exercises (was 52530cc).
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ git push
 Username for 'https://github.com': rweisser
-Password for 'https://rweisser@github.com': 
+Password for 'https://rweisser@github.com':
 Counting objects: 93, done.
 Delta compression using up to 8 threads.
 Compressing objects: 100% (91/91), done.
@@ -2645,7 +2645,7 @@ Writing objects: 100% (93/93), 16.67 KiB | 0 bytes/s, done.
 Total 93 (delta 68), reused 0 (delta 0)
 To https://github.com/rweisser/sample_app.git
    4212e3b..52530cc  master -> master
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ git push heroku
 Fetching repository, done.
@@ -2737,7 +2737,7 @@ Total 93 (delta 68), reused 0 (delta 0)
 
 To git@heroku.com:cryptic-basin-4588.git
    4212e3b..52530cc  master -> master
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ heroku pg:reset DATABASE
 
@@ -2747,7 +2747,7 @@ To git@heroku.com:cryptic-basin-4588.git
 
 > cryptic-basin-4588
 Resetting HEROKU_POSTGRESQL_ONYX_URL (DATABASE_URL)... done
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ heroku run rake db:migrate
 Running `rake db:migrate` attached to terminal... up, run.1547
@@ -2783,11 +2783,11 @@ Migrating to AddAdminToUsers (20140721200550)
    -> 0.0275s
 == 20140721200550 AddAdminToUsers: migrated (0.0280s) =========================
 
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ heroku run rake db:populate
 Running `rake db:populate` attached to terminal... up, run.6090
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 (Whew!)
 
@@ -2804,7 +2804,7 @@ Creating the micropost model:
       create    app/models/micropost.rb
       invoke    rspec
       create      spec/models/micropost_spec.rb
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Added an index to the migration.
 
@@ -2816,10 +2816,10 @@ Added an index to the migration.
    -> 0.0020s
 == 20140805020153 CreateMicroposts: migrated (0.0061s) ========================
 
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake test:prepare
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 After update lib/tasks/sample_data.rake to create microposts for the
 first 6 users (50 microposts each):
@@ -2844,11 +2844,11 @@ Stopped the server.  (This time I remembered.)
    -> 0.0016s
 -- initialize_schema_migrations_table()
    -> 0.0048s
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake db:populate
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake test:prepare
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
 
 Renamed create_new_user to create_user and create_new_micropost to
 create_micropost.  I realized that "new" was superfluous.  When you
@@ -2859,5 +2859,66 @@ Integration tests for microposts:
 [~/self/rails/tutorials/hartl/rails4/sample_app]$ rails g integration_test micropost_pages
       invoke  rspec
       create    spec/requests/micropost_pages_spec.rb
-[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
+
+Exercise 10.5.7.  Add javascript counter to micorpost content
+textarea.  This one was very interesting.  I tried putting js into
+app/assets/javascripts/static_pages.js.coffee.  Unfortunately,
+coffeescript does not allow the word *function* which was a bit of
+a shock.  Here I am struggling with js, only to find out that the
+word *function* is not allowd.  I created a new dir, static_pages,
+in app/assets/javascripts, and created a new file, static_pages.js.erb,
+in it.  I then tried a solution which used erb.  This didn't work.
+I was trying to reference js vars in my erb.  I realized eventually
+that the js vars don't exist while the erb is being processed.  So
+that was a no go.  I took out the erb and tried a pure js+jquery
+solution.  It didn't work at first, because I didn't put it in
+the $(document).ready wrapper.  Here is the correct version:
+
+    $(function() {
+
+        $("#micropost_content").keyup(function() {
+            var remaining = 140 - $(this).val().length;
+            var plural = remaining == 1 ? "" : "s";
+            $('#mc_remaining').text(remaining +
+                ' character' + plural + ' remaining');
+        });
+
+    });
+
+This worked fine, although it allows the user to enter too many chars
+in the textarea, leading to messages like
+
+    -8 characters remaining.
+
+I decided to figure out coffeescript.  The result:
+
+    $ ->
+      # Remaining character counter for the micropost content textarea.
+      $("#micropost_content").keyup ->
+        max = 140
+        len = $(this).val().length
+        if len > max
+          # Can't use text on textareas, have to user val.
+          $(this).val $(this).val().substring(0, max)
+          len = max
+        remaining = max - len
+        plural = if remaining == 1 then "" else "s"
+        $('#mc_remaining').text "#{remaining} character#{plural} remaining"
+
+It took a while to get used to the syntax.  I'm still not sure why
+I need parens after val in "len = $(this).val().length".  It didn't
+work without them.   I added code to prevent the text in the textarea
+from growing past the max of 140.  It didn't work until I found out
+that you can't use .text with a textarea.  You have to use .val
+instead.  I'm not sure why jQuery doesn't change .text into .val
+when the target is a textarea.  Of course, jQuery is impressive
+enough, so I shouldn't expect it to do more than it already does.
+
+Doing this exercise was very satisfying.  I took advantage of having read
+my javascript book and my jQuery book.  The code works very well.  It
+handles cut and paste as well as normal text entry.
+
+This finishes chapter 10.  I will do the git and heroku stuff and then
+on to chapter 11, the final chapter.
 
