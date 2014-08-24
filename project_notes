@@ -2922,3 +2922,51 @@ handles cut and paste as well as normal text entry.
 This finishes chapter 10.  I will do the git and heroku stuff and then
 on to chapter 11, the final chapter.
 
+Wrap-up for chapter 10:
+
+git status
+git add --all
+git push
+git co master
+git merge chapter-10-exercises
+
+git push heroku
+heroku pg:reset DATABASE
+heroku run rake db:reset
+heroku run rake db:populate
+git branch -d chapter-10-exercises
+
+Chapter 11
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ rails g model Relationship
+follower_id:integer followed_id:integer
+      invoke  active_record
+      create    db/migrate/20140820033524_create_relationships.rb
+      create    app/models/relationship.rb
+      invoke    rspec
+      create      spec/models/relationship_spec.rb
+[~/self/rails/tutorials/hartl/rails4/sample_app]$
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ rm -f spec/factories/relationships.rb
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+The rm command was unnecessary, since rails g did not create
+spec/factories/relationships.rb.
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake db:migrate
+== 20140820033524 CreateRelationships: migrating ==============================
+-- create_table(:relationships)
+   -> 0.3068s
+-- add_index(:relationships, :follower_id)
+   -> 0.0243s
+-- add_index(:relationships, :followed_id)
+   -> 0.0026s
+-- add_index(:relationships, [:follower_id, :followed_id], {:unique=>true})
+   -> 0.0015s
+== 20140820033524 CreateRelationships: migrated (0.3355s) =====================
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ bin/rake test:prepare
+[~/self/rails/tutorials/hartl/rails4/sample_app]$ 
+

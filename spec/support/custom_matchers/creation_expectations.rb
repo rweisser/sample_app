@@ -39,10 +39,10 @@ RSpec::Matchers.define :destroy do | model, options |
   end
 end
 
-RSpec::Matchers.define :destroy_first do | model, options |
+RSpec::Matchers.define :destroy_first do | model, options = {} |
   match do | element |
     count = model.count
-    click element, (options ||= {}).merge(match: :first)
+    click element, options.merge(match: :first)
     model.count == count - 1
   end
 end
